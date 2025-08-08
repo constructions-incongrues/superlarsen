@@ -16,6 +16,7 @@ services:
     labels:
       caddy: superlarsen.interzone.network
       caddy.reverse_proxy: "{{upstreams 80}}"
+      caddy.auto_https: prefer_wildcard
 
   db:
     image: mysql:8.0
