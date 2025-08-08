@@ -1,0 +1,27 @@
+services:
+
+  wordpress:
+    image: wordpress
+    restart: always
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: ${WORDPRESS_DB_USER:-exampleuser}
+      WORDPRESS_DB_PASSWORD: ${WORDPRESS_DB_PASSWORD:-examplepass}
+      WORDPRESS_DB_NAME: ${WORDPRESS_DB_NAME:-exampledb}
+    volumes:
+      - wordpress:/var/www/html
+
+  db:
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-exampledb}
+      MYSQL_USER: ${MYSQL_USER:-exampleuser}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-examplepass}
+      MYSQL_RANDOM_ROOT_PASSWORD: '1'
+    volumes:
+      - db:/var/lib/mysql
+
+volumes:
+  wordpress:
+  db:

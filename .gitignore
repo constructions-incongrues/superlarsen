@@ -1,4 +1,2 @@
-libretime/.env
+.env
 libretime/config.yml
-castopod/.env
-ghost/.env
