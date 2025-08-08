@@ -90,6 +90,6 @@ name = "superlarsen"
 tags = ["superlarsen"]
 [resource_sync.config]
 linked_repo = "superlarsen-main"
-resource_path = ["resources/superlarsen.toml"]
+resource_path = ["infrastructure/resources.toml"]
 managed = true
 match_tags = ["superlarsen"]
