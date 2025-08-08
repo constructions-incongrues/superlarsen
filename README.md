@@ -12,6 +12,7 @@
 - [libretime](./libretime/)
 - <https://cartons.pastis-hosting.net/stacks/6895ceb9dffe250360ab3f2e>
 - <https://libretime-superlarsen.interzone.network>
+- <https://icecast-superlarsen.interzone.network>
 
 
 ### castopod
@@ -24,4 +25,4 @@
 
 - [wordpress](./wordpress/)
 - <https://cartons.pastis-hosting.net/stacks/689624b63f85f8cb80ecd01a>
-- <https://icecast-superlarsen.interzone.network>
+- <https://wordpress-superlarsen.interzone.network>
