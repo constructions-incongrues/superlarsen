@@ -1,0 +1,51 @@
+services:
+  app:
+    image: castopod/castopod:latest
+    volumes:
+      - castopod-media:/var/www/castopod/public/media
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-castopod}
+      MYSQL_USER: ${MYSQL_USER:-castopod}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-castopod}
+      CP_BASEURL: ${CP_BASEURL:-http://localhost:8000}
+      CP_ANALYTICS_SALT: ${CP_ANALYTICS_SALT:-changeme}
+      CP_CACHE_HANDLER: redis
+      CP_REDIS_HOST: redis
+      CP_REDIS_PASSWORD: ${CP_REDIS_PASSWORD:-changeme}
+      CP_DISABLE_HTTPS: ${CP_DISABLE_HTTPS:-1}
+    networks:
+      - castopod-app
+      - castopod-db
+    ports:
+      - 8000:8000
+    restart: unless-stopped
+
+  mariadb:
+    image: mariadb:10.5
+    networks:
+      - castopod-db
+    volumes:
+      - castopod-db:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-changeme}
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-castopod}
+      MYSQL_USER: ${MYSQL_USER:-castopod}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-castopod}
+    restart: unless-stopped
+
+  redis:
+    image: redis:7.0-alpine
+    command: --requirepass changeme
+    volumes:
+      - castopod-cache:/data
+    networks:
+      - castopod-app
+
+volumes:
+  castopod-media:
+  castopod-db:
+  castopod-cache:
+
+networks:
+  castopod-app:
+  castopod-db:
