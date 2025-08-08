@@ -15,7 +15,7 @@ services:
       CP_DISABLE_HTTPS: ${CP_DISABLE_HTTPS:-1}
     networks:
       - castopod-app
-      - castopod-db$
+      - castopod-db
       - caddy
     restart: unless-stopped
     labels:
