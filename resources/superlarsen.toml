@@ -1,0 +1,95 @@
+[[stack]]
+name = "superlarsen-castopod"
+tags = ["production", "superlarsen"]
+[stack.config]
+server = "cartons"
+linked_repo = "superlarsen-main"
+webhook_secret = "[[SUPERLARSEN_CASTOPOD_WEBHOOK_SECRET]]"
+run_directory = "stacks/castopod"
+environment = """
+MYSQL_DATABASE=castopod
+MYSQL_USER=castopod
+MYSQL_PASSWORD=[[SUPERLARSEN_CASTOPOD_MYSQL_PASSWORD]]
+CP_BASEURL=https://castopod-superlarsen.interzone.network
+CP_REDIS_PASSWORD=[[SUPERLARSEN_CASTOPOD_CP_REDIS_PASSWORD]]
+CP_ANALYTICS_SALT=[[SUPERLARSEN_CASTOPOD_CP_ANALYTICS_SALT]]
+MYSQL_ROOT_PASSWORD=[[SUPERLARSEN_CASTOPOD_MYSQL_ROOT_PASSWORD]]
+CP_DISABLE_HTTPS=0
+"""
+
+##
+
+[[stack]]
+name = "superlarsen-libretime"
+tags = ["superlarsen", "production"]
+[stack.config]
+server = "cartons"
+linked_repo = "superlarsen-main"
+webhook_secret = "[[SUPERLARSEN_LIBRETIME_WEBHOOK_SECRET]]"
+webhook_force_deploy = true
+run_directory = "stacks/libretime"
+pre_deploy.command = """
+/bin/bash -a -c "source ./.env; envsubst < config.template.yml > config.yml"
+docker compose -p superlarsen-libretime -f compose.yaml run --rm api libretime-api migrate
+"""
+environment = """
+# Postgres
+POSTGRES_PASSWORD=[[SUPERLARSEN_LIBRETIME_POSTGRES_PASSWORD]]
+
+# RabbitMQ
+RABBITMQ_DEFAULT_PASS=[[SUPERLARSEN_LIBRETIME_RABBITMQ_DEFAULT_PASS]]
+
+# Icecast
+ICECAST_SOURCE_PASSWORD=[[SUPERLARSEN_LIBRETIME_ICECAST_SOURCE_PASSWORD]]
+ICECAST_ADMIN_PASSWORD=[[SUPERLARSEN_LIBRETIME_ICECAST_ADMIN_PASSWORD]]
+ICECAST_RELAY_PASSWORD=[[SUPERLARSEN_LIBRETIME_ICECAST_RELAY_PASSWORD]]
+
+# Django
+API_KEY=[[SUPERLARSEN_LIBRETIME_API_KEY]]
+DJANGO_SECRET_KEY=[[SUPERLARSEN_LIBRETIME_DJANGO_SECRET_KEY]]
+PUBLIC_URL=https://libretime-superlarsen.interzone.network
+"""
+
+##
+
+[[stack]]
+name = "superlarsen-wordpress"
+tags = ["superlarsen", "production"]
+[stack.config]
+server = "cartons"
+links = [
+  "https://wordpress-superlarsen.interzone.network"
+]
+linked_repo = "superlarsen-main"
+webhook_secret = "[[SUPERLARSEN_WORDPRESS_WEBHOOK_SECRET]]"
+run_directory = "stacks/wordpress"
+environment = """
+WORDPRESS_DB_USER=superlarsen
+WORDPRESS_DB_PASSWORD=[[SUPERLARSEN_WORDPRESS_WORDPRESS_DB_PASSWORD]]
+WORDPRESS_DB_NAME=superlarsen
+MYSQL_DATABASE=superlarsen
+MYSQL_USER=superlarsen
+MYSQL_PASSWORD=[[SUPERLARSEN_WORDPRESS_WORDPRESS_DB_PASSWORD]]
+"""
+
+##
+
+[[repo]]
+name = "superlarsen-main"
+tags = ["superlarsen"]
+[repo.config]
+server = "cartons"
+builder = "local"
+git_account = "trivoallan"
+repo = "constructions-incongrues/superlarsen"
+
+##
+
+[[resource_sync]]
+name = "superlarsen"
+tags = ["superlarsen"]
+[resource_sync.config]
+linked_repo = "superlarsen-main"
+resource_path = ["resources/superlarsen.toml"]
+managed = true
+match_tags = ["superlarsen"]
