@@ -85,11 +85,27 @@ repo = "constructions-incongrues/superlarsen"
 
 ##
 
+[[procedure]]
+name = "superlarsen"
+tags = ["superlarsen"]
+config.schedule = "Every Sunday at midnight"
+
+[[procedure.config.stage]]
+name = "Sync"
+enabled = true
+executions = [
+  { execution.type = "RunSync", execution.params.sync = "superlarsen", enabled = true }
+]
+
+##
+
 [[resource_sync]]
 name = "superlarsen"
 tags = ["superlarsen"]
 [resource_sync.config]
 linked_repo = "superlarsen-main"
-resource_path = ["infrastructure/resources.toml"]
+resource_path = [
+  "infrastructure/resources.toml"
+]
 managed = true
 match_tags = ["superlarsen"]
