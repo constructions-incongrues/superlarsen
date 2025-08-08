@@ -134,7 +134,7 @@ liquidsoap:
 
   # Input harbor listen address.
   # > default is ["0.0.0.0"]
-  harbor_listen_address: ["0.0.0.0"]
+  harbor_listen_address: [0.0.0.0]
 
   # Input harbor tls certificate path.
   harbor_ssl_certificate:
