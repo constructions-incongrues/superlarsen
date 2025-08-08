@@ -1,6 +1,6 @@
 [[stack]]
 name = "superlarsen-castopod"
-tags = ["production", "superlarsen"]
+tags = ["superlarsen"]
 [stack.config]
 server = "cartons"
 linked_repo = "superlarsen-main"
@@ -21,7 +21,7 @@ CP_DISABLE_HTTPS=0
 
 [[stack]]
 name = "superlarsen-libretime"
-tags = ["superlarsen", "production"]
+tags = ["superlarsen"]
 [stack.config]
 server = "cartons"
 linked_repo = "superlarsen-main"
@@ -54,7 +54,7 @@ PUBLIC_URL=https://libretime-superlarsen.interzone.network
 
 [[stack]]
 name = "superlarsen-wordpress"
-tags = ["superlarsen", "production"]
+tags = ["superlarsen"]
 [stack.config]
 server = "cartons"
 links = [
