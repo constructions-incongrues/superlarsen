@@ -4,7 +4,7 @@
 
 ### État des services
 
-- <https://status-superlarsen.interzone.network>``
+- <https://status-superlarsen.interzone.network>
 - <https://github.com/constructions-incongrues/superlarsen-status>
 
 ### CI/CD
