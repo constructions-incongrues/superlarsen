@@ -99,17 +99,25 @@ services:
 
   nginx:
     image: ghcr.io/libretime/libretime-nginx:${LIBRETIME_VERSION:-latest}
-    ports:
-      - 8080:8080
     depends_on:
       - legacy
     volumes:
       - libretime_storage:/srv/libretime:ro
+    networks:
+      - caddy
+      - default
+    labels:
+      caddy: libretime-superlarsen.interzone.network
+      caddy.reverse_proxy: "{{upstreams 8080}}"
 
   icecast:
     image: ghcr.io/libretime/icecast:2.4.4
-    ports:
-      - 8000:8000
+    networks:
+      - caddy
+      - default
+    labels:
+      caddy: icecast-superlarsen.interzone.network
+      caddy.reverse_proxy: "{{upstreams 8000}}"
     environment:
       ICECAST_SOURCE_PASSWORD: ${ICECAST_SOURCE_PASSWORD:-hackme} # Change me !
       ICECAST_ADMIN_PASSWORD: ${ICECAST_ADMIN_PASSWORD:-hackme} # Change me !
@@ -119,3 +127,7 @@ volumes:
   postgres_data: {}
   libretime_storage: {}
   libretime_playout: {}
+
+networks:
+  caddy:
+    external: true
