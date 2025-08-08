@@ -91,6 +91,15 @@ resource "cloudflare_record" "wordpress" {
   proxied = false
 }
 
+resource "cloudflare_record" "status" {
+  zone_id = data.cloudflare_zone.main.id
+  name    = "status-superlarsen"
+  content = "constructions-incongrues.github.io"
+  type    = "CNAME"
+  ttl     = 300
+  proxied = false
+}
+
 # Outputs
 output "zone_info" {
   description = "Informations sur la zone"
