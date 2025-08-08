@@ -2,12 +2,17 @@
 
 ## Outils de gestion
 
-- <status-superlarsen.interzone.network>
-- <https://cartons.pastis-hosting.net/stacks>
-- <https://github.com/constructions-incongrues/superlarsen>
-- <https://app.terraform.io/app/constructions-incongrues/workspaces/superlarsen>
+### État des services
 
-## Stacks
+- <https://status-superlarsen.interzone.network>``
+- <https://github.com/constructions-incongrues/superlarsen-status>
+
+### CI/CD
+
+- Déploiement des stacks applicatifs : <https://cartons.pastis-hosting.net/stacks>
+- Infrastructure : <https://app.terraform.io/app/constructions-incongrues/workspaces/superlarsen>
+
+## Stacks applicatif
 
 ### libretime
 
