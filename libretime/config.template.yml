@@ -73,7 +73,7 @@ rabbitmq:
 email:
   # Sender email address to use when sending emails.
   # > default is no-reply@libretime.org
-  from_address: libretime@superlarsen.incongru.org
+  from_address: superlarsen@interzone.network
 
   # The hostname of the SMTP server.
   # > default is localhost
