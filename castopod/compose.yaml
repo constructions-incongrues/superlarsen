@@ -15,10 +15,12 @@ services:
       CP_DISABLE_HTTPS: ${CP_DISABLE_HTTPS:-1}
     networks:
       - castopod-app
-      - castopod-db
-    ports:
-      - 8000:8000
+      - castopod-db$
+      - caddy
     restart: unless-stopped
+    labels:
+      caddy: castopod-superlarsen.interzone.network
+      caddy.reverse_proxy: "{{upstreams 8000}}"
 
   mariadb:
     image: mariadb:10.5
@@ -49,3 +51,5 @@ volumes:
 networks:
   castopod-app:
   castopod-db:
+  caddy:
+    external: true
