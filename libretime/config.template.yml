@@ -3,13 +3,13 @@
 general:
   # The public url.
   # > this field is REQUIRED
-  public_url:
+  public_url: ${PUBLIC_URL}
   # The internal API authentication key.
   # > this field is REQUIRED
-  api_key:
+  api_key:  ${API_KEY}
   # The Django API secret key.
   # > this field is REQUIRED
-  secret_key:
+  secret_key: ${DJANGO_SECRET_KEY}
 
   # List of origins allowed to access resources on the server, the public url
   # origin is automatically included.
@@ -19,7 +19,7 @@ general:
   # The server timezone, should be a lookup key in the IANA time zone database,
   # for example Europe/Berlin.
   # > default is UTC
-  timezone: UTC
+  timezone: Europe/Paris
 
   # How many hours ahead Playout should cache scheduled media files.
   # > default is 1
@@ -73,7 +73,7 @@ rabbitmq:
 email:
   # Sender email address to use when sending emails.
   # > default is no-reply@libretime.org
-  from_address: no-reply@libretime.org
+  from_address: libretime@superlarsen.incongru.org
 
   # The hostname of the SMTP server.
   # > default is localhost
@@ -230,12 +230,12 @@ stream:
         source_user: source
         # Icecast source password.
         # > this field is REQUIRED
-        source_password: hackme
+        source_password: ${ICECAST_SOURCE_PASSWORD}
         # Icecast admin user.
         # > default is admin
         admin_user: admin
         # Icecast admin password. If not defined, statistics will not be collected.
-        admin_password: hackme
+        admin_password: ${ICECAST_ADMIN_PASSWORD}
 
         # Icecast output audio.
         audio:
@@ -256,7 +256,7 @@ stream:
           enable_metadata: false
 
         # Icecast stream name.
-        name: LibreTime!
+        name: Superlarsen
         # Icecast stream description.
         description: LibreTime Radio!
         # Icecast stream website.
