@@ -1,0 +1,4 @@
+services:
+  smtp:
+    image: ixdotai/smtp:v0.7.7
+    restart: always
