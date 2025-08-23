@@ -6,6 +6,13 @@
 	"image": "mcr.microsoft.com/devcontainers/base:bullseye",
 	"features": {
 		"ghcr.io/devcontainers/features/terraform:1": {}
+	},
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"HashiCorp.terraform"
+			]
+		}
 	}
 
 	// Features to add to the dev container. More info: https://containers.dev/features.
