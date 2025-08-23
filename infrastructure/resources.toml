@@ -53,21 +53,6 @@ PUBLIC_URL=https://libretime.superlarsen.fr
 ##
 
 [[stack]]
-name = "superlarsen-smtp"
-tags = ["superlarsen"]
-[stack.config]
-server = "cartons"
-linked_repo = "superlarsen-main"
-run_directory = "stacks/smtp"
-environment = """
-MAILNAME=superlarsen.fr
-GMAIL_USER=[[SUPERLARSEN_SMTP_USER]]
-GMAIL_PASSWORD=[[SUPERLARSEN_SMTP_PASSWORD]]
-"""
-
-##
-
-[[stack]]
 name = "superlarsen-wordpress"
 tags = ["superlarsen"]
 [stack.config]
