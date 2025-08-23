@@ -10,7 +10,7 @@ environment = """
 MYSQL_DATABASE=castopod
 MYSQL_USER=castopod
 MYSQL_PASSWORD=[[SUPERLARSEN_CASTOPOD_MYSQL_PASSWORD]]
-CP_BASEURL=https://castopod-superlarsen.interzone.network
+CP_BASEURL=https://castopod.superlarsen.fr
 CP_REDIS_PASSWORD=[[SUPERLARSEN_CASTOPOD_CP_REDIS_PASSWORD]]
 CP_ANALYTICS_SALT=[[SUPERLARSEN_CASTOPOD_CP_ANALYTICS_SALT]]
 MYSQL_ROOT_PASSWORD=[[SUPERLARSEN_CASTOPOD_MYSQL_ROOT_PASSWORD]]
@@ -47,7 +47,7 @@ ICECAST_RELAY_PASSWORD=[[SUPERLARSEN_LIBRETIME_ICECAST_RELAY_PASSWORD]]
 # Django
 API_KEY=[[SUPERLARSEN_LIBRETIME_API_KEY]]
 DJANGO_SECRET_KEY=[[SUPERLARSEN_LIBRETIME_DJANGO_SECRET_KEY]]
-PUBLIC_URL=https://libretime-superlarsen.interzone.network
+PUBLIC_URL=https://libretime.superlarsen.fr
 """
 
 ##
@@ -58,7 +58,7 @@ tags = ["superlarsen"]
 [stack.config]
 server = "cartons"
 links = [
-  "https://wordpress-superlarsen.interzone.network"
+  "https://wordpress.superlarsen.fr"
 ]
 linked_repo = "superlarsen-main"
 webhook_secret = "[[SUPERLARSEN_WORDPRESS_WEBHOOK_SECRET]]"
