@@ -3,18 +3,7 @@ services:
     image: castopod/castopod:latest
     volumes:
       - castopod-media:/var/www/castopod/public/media
-    environment:
-      MYSQL_DATABASE: ${MYSQL_DATABASE:-castopod}
-      MYSQL_USER: ${MYSQL_USER:-castopod}
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-castopod}
-      CP_BASEURL: ${CP_BASEURL:-http://localhost:8000}
-      CP_ANALYTICS_SALT: ${CP_ANALYTICS_SALT:-changeme}
-      CP_CACHE_HANDLER: redis
-      CP_REDIS_HOST: redis
-      CP_REDIS_PASSWORD: ${CP_REDIS_PASSWORD:-changeme}
-      CP_DISABLE_HTTPS: ${CP_DISABLE_HTTPS:-1}
-      CP_EMAIL_SMTP_HOST: smtp-smtp-1
-      CP_EMAIL_FROM: castopod@superlarsen.fr
+    env_file: .env
     networks:
       - castopod-app
       - castopod-db
