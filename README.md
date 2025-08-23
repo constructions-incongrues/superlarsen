@@ -32,4 +32,4 @@
 
 - [wordpress](./stacks/wordpress/)
 - <https://cartons.pastis-hosting.net/stacks/689624b63f85f8cb80ecd01a>
-- <https://wordpress.superlarsen.fr>
+- <https://www.superlarsen.fr>
