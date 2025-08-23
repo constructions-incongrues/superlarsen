@@ -77,7 +77,7 @@ email:
 
   # The hostname of the SMTP server.
   # > default is localhost
-  host: localhost
+  host: smtp
   # The port of the SMTP server.
   # > default is 25
   port: 25
