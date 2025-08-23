@@ -57,7 +57,7 @@ data "cloudflare_zone" "main" {
 # Enregistrement CNAME
 resource "cloudflare_record" "libretime" {
   zone_id = data.cloudflare_zone.main.id
-  name    = "libretime-superlarsen"
+  name    = "libretime"
   content = "cartons.pastis-hosting.net"
   type    = "CNAME"
   ttl     = 300
@@ -66,7 +66,7 @@ resource "cloudflare_record" "libretime" {
 
 resource "cloudflare_record" "icecast" {
   zone_id = data.cloudflare_zone.main.id
-  name    = "icecast-superlarsen"
+  name    = "icecast"
   content = "cartons.pastis-hosting.net"
   type    = "CNAME"
   ttl     = 300
@@ -75,7 +75,7 @@ resource "cloudflare_record" "icecast" {
 
 resource "cloudflare_record" "castopod" {
   zone_id = data.cloudflare_zone.main.id
-  name    = "castopod-superlarsen"
+  name    = "castopod"
   content = "cartons.pastis-hosting.net"
   type    = "CNAME"
   ttl     = 300
@@ -84,7 +84,7 @@ resource "cloudflare_record" "castopod" {
 
 resource "cloudflare_record" "wordpress" {
   zone_id = data.cloudflare_zone.main.id
-  name    = "wordpress-superlarsen"
+  name    = "wordpress"
   content = "cartons.pastis-hosting.net"
   type    = "CNAME"
   ttl     = 300
@@ -93,7 +93,7 @@ resource "cloudflare_record" "wordpress" {
 
 resource "cloudflare_record" "status" {
   zone_id = data.cloudflare_zone.main.id
-  name    = "status-superlarsen"
+  name    = "status"
   content = "constructions-incongrues.github.io"
   type    = "CNAME"
   ttl     = 300
