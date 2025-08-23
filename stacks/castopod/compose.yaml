@@ -3,7 +3,6 @@ services:
     image: castopod/castopod:latest
     volumes:
       - castopod-media:/var/www/castopod/public/media
-    env_file: .env
     networks:
       - castopod-app
       - castopod-db
