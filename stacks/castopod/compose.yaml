@@ -14,7 +14,7 @@ services:
       CP_REDIS_PASSWORD: ${CP_REDIS_PASSWORD:-changeme}
       CP_DISABLE_HTTPS: ${CP_DISABLE_HTTPS:-1}
       email.fromEmail: castopod@superlarsen.fr
-      email.SMTPHost: smtp
+      email.SMTPHost: smtp-smtp-1
       email.SMTPUser: ""
       email.SMTPPass: ""
     networks:
