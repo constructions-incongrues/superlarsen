@@ -59,6 +59,11 @@ tags = ["superlarsen"]
 server = "cartons"
 linked_repo = "superlarsen-main"
 run_directory = "stacks/smtp"
+environment = """
+MAILNAME=superlarsen.fr
+GMAIL_USER=[[SUPERLARSEN_SMTP_USER]]
+GMAIL_PASSWORD=[[SUPERLARSEN_SMTP_PASSWORD]]
+"""
 
 ##
 
