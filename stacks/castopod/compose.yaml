@@ -21,6 +21,7 @@ services:
       - castopod-app
       - castopod-db
       - caddy
+      - smtp
     restart: unless-stopped
     labels:
       caddy: castopod.superlarsen.fr
@@ -57,5 +58,5 @@ networks:
   castopod-db:
   caddy:
     external: true
-  superlarsen-smtp_default:
+  smtp:
     external: true

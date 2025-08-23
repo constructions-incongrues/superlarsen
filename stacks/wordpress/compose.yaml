@@ -15,7 +15,7 @@ services:
     networks:
       - caddy
       - default
-      - superlarsen-smtp_defaults
+      - smtp
     labels:
       caddy: www.superlarsen.fr
       caddy.reverse_proxy: "{{upstreams 80}}"
@@ -38,5 +38,5 @@ volumes:
 networks:
   caddy:
     external: true
-  superlarsen-smtp_default:
+  smtp:
     external: true
