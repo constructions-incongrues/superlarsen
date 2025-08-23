@@ -13,10 +13,8 @@ services:
       CP_REDIS_HOST: redis
       CP_REDIS_PASSWORD: ${CP_REDIS_PASSWORD:-changeme}
       CP_DISABLE_HTTPS: ${CP_DISABLE_HTTPS:-1}
-      email.fromEmail: castopod@superlarsen.fr
-      email.SMTPHost: smtp-smtp-1
-      email.SMTPUser: ""
-      email.SMTPPass: ""
+      CP_EMAIL_SMTP_HOST: smtp-smtp-1
+      CP_EMAIL_FROM: castopod@superlarsen.fr
     networks:
       - castopod-app
       - castopod-db
