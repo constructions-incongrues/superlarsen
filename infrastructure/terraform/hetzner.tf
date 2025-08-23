@@ -21,5 +21,5 @@ resource "hcloud_volume" "superlarsen" {
 
 resource "hcloud_volume_attachment" "superlarsen_attachment" {
   volume_id = hcloud_volume.superlarsen.id
-  server_id = hcloud_server.cartons.id
+  server_id = data.hcloud_server.cartons.id
 }
