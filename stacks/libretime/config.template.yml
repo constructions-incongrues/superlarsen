@@ -85,7 +85,7 @@ email:
   # on port 465) or a STARTTLS (explicit) connection (generally on port 587) when
   # talking to the SMTP server.
   # > must be one of (ssl/tls, starttls)
-  encryption: tls
+  encryption: starttls
   # The username to use for the SMTP server.
   # > default is ""
   user: ${SMTP_USER}
