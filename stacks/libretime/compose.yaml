@@ -96,6 +96,9 @@ services:
     volumes:
       - ${LIBRETIME_CONFIG_FILEPATH:-./config.yml}:/etc/libretime/config.yml:ro
       - libretime_storage:/srv/libretime
+    networks:
+      - default
+      - smtp
 
   nginx:
     image: ghcr.io/libretime/libretime-nginx:${LIBRETIME_VERSION:-latest}
@@ -131,5 +134,5 @@ volumes:
 networks:
   caddy:
     external: true
-  superlarsen-smtp_default:
+  smtp:
     external: true

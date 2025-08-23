@@ -1,4 +1,0 @@
-services:
-  smtp:
-    image: ixdotai/smtp:latest
-    env_file: .env
