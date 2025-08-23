@@ -2,8 +2,3 @@ services:
   smtp:
     image: ixdotai/smtp:latest
     env_file: .env
-    networks:
-      - superlarsen_smtp
-
-networks:
-  superlarsen_smtp:
