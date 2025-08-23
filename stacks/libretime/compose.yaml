@@ -131,3 +131,5 @@ volumes:
 networks:
   caddy:
     external: true
+  superlarsen-smtp_default:
+    external: true
