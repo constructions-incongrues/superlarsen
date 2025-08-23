@@ -53,13 +53,21 @@ PUBLIC_URL=https://libretime.superlarsen.fr
 ##
 
 [[stack]]
+name = "superlarsen-smtp"
+tags = ["superlarsen"]
+[stack.config]
+server = "cartons"
+linked_repo = "superlarsen-main"
+run_directory = "stacks/smtp"
+
+##
+
+[[stack]]
 name = "superlarsen-wordpress"
 tags = ["superlarsen"]
 [stack.config]
 server = "cartons"
-links = [
-  "https://www.superlarsen.fr"
-]
+links = ["https://www.superlarsen.fr"]
 linked_repo = "superlarsen-main"
 webhook_secret = "[[SUPERLARSEN_WORDPRESS_WEBHOOK_SECRET]]"
 run_directory = "stacks/wordpress"
