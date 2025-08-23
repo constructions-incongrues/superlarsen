@@ -107,7 +107,7 @@ services:
       - caddy
       - default
     labels:
-      caddy: libretime-superlarsen.interzone.network
+      caddy: libretime.superlarsen.fr
       caddy.reverse_proxy: "{{upstreams 8080}}"
 
   icecast:
@@ -116,7 +116,7 @@ services:
       - caddy
       - default
     labels:
-      caddy: icecast-superlarsen.interzone.network
+      caddy: icecast.superlarsen.fr
       caddy.reverse_proxy: "{{upstreams 8000}}"
     environment:
       ICECAST_SOURCE_PASSWORD: ${ICECAST_SOURCE_PASSWORD:-hackme} # Change me !

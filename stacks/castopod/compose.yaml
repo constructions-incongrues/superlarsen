@@ -19,7 +19,7 @@ services:
       - caddy
     restart: unless-stopped
     labels:
-      caddy: castopod-superlarsen.interzone.network
+      caddy: castopod.superlarsen.fr
       caddy.reverse_proxy: "{{upstreams 8000}}"
 
   mariadb:
