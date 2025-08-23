@@ -58,7 +58,7 @@ tags = ["superlarsen"]
 [stack.config]
 server = "cartons"
 links = [
-  "https://wordpress.superlarsen.fr"
+  "https://www.superlarsen.fr"
 ]
 linked_repo = "superlarsen-main"
 webhook_secret = "[[SUPERLARSEN_WORDPRESS_WEBHOOK_SECRET]]"

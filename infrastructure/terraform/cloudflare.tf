@@ -92,7 +92,7 @@ resource "cloudflare_record" "castopod" {
 
 resource "cloudflare_record" "wordpress" {
   zone_id = data.cloudflare_zone.main.id
-  name    = "wordpress"
+  name    = "www"
   content = "cartons.pastis-hosting.net"
   type    = "CNAME"
   ttl     = 300

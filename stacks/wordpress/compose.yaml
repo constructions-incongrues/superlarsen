@@ -16,7 +16,7 @@ services:
       - caddy
       - default
     labels:
-      caddy: wordpress.superlarsen.fr
+      caddy: www.superlarsen.fr
       caddy.reverse_proxy: "{{upstreams 80}}"
 
   db:
