@@ -50,6 +50,8 @@ services:
       - libretime_playout:/app
     environment:
       LIBRETIME_GENERAL_PUBLIC_URL: http://nginx:8080
+    networks:
+      - default
 
   analyzer:
     image: ghcr.io/libretime/libretime-analyzer:${LIBRETIME_VERSION:-latest}
