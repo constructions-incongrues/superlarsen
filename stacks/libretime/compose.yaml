@@ -29,7 +29,10 @@ services:
       - ${LIBRETIME_CONFIG_FILEPATH:-./config.yml}:/etc/libretime/config.yml:ro
       - libretime_playout:/app
     environment:
-      LIBRETIME_GENERAL_PUBLIC_URL: http://nginx:8080
+      LIBRETIME_GENERAL_PUBLIC_URL: https://libretime.superlarsen.fr
+    networks:
+      - default
+      - smtp
 
   liquidsoap:
     image: ghcr.io/libretime/libretime-playout:${LIBRETIME_VERSION:-latest}
@@ -72,6 +75,9 @@ services:
       - ${LIBRETIME_CONFIG_FILEPATH:-./config.yml}:/etc/libretime/config.yml:ro
     environment:
       LIBRETIME_GENERAL_PUBLIC_URL: http://nginx:8080
+    networks:
+      - default
+      - smtp
 
   api:
     image: ghcr.io/libretime/libretime-api:${LIBRETIME_VERSION:-latest}
@@ -84,6 +90,9 @@ services:
     volumes:
       - ${LIBRETIME_CONFIG_FILEPATH:-./config.yml}:/etc/libretime/config.yml:ro
       - libretime_storage:/srv/libretime
+    networks:
+      - default
+      - smtp
 
   legacy:
     image: ghcr.io/libretime/libretime-legacy:${LIBRETIME_VERSION:-latest}
