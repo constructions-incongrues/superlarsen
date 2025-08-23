@@ -39,6 +39,9 @@ pre_deploy.command = """
 docker compose -p superlarsen-libretime -f compose.yaml run --rm api libretime-api migrate
 """
 environment = """
+# Libretime
+LIBRETIME_VERSION=4.5.0
+
 # Postgres
 POSTGRES_PASSWORD=[[SUPERLARSEN_LIBRETIME_POSTGRES_PASSWORD]]
 
