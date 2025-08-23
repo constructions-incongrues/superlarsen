@@ -1,4 +1,9 @@
 services:
   smtp:
-    image: ixdotai/smtp:v0.7.7
-    restart: always
+    image: ixdotai/smtp:latest
+    env_file: .env
+    networks:
+      - superlarsen_smtp
+
+networks:
+  superlarsen_smtp:
