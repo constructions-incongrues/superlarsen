@@ -1,5 +1,13 @@
 # Configuration du provider Cloudflare
 terraform {
+  backend "remote" {
+    hostname = "app.terraform.io"
+    organization = "constructions-incongrues"
+
+    workspaces {
+      name = "superlarsen"
+    }
+  }
 
   required_providers {
     cloudflare = {
