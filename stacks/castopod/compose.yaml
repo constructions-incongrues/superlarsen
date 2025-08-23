@@ -9,6 +9,7 @@ services:
       - caddy
       - smtp
     restart: unless-stopped
+    env_file: .env
     labels:
       caddy: castopod.superlarsen.fr
       caddy.reverse_proxy: "{{upstreams 8000}}"
