@@ -77,21 +77,21 @@ email:
 
   # The hostname of the SMTP server.
   # > default is localhost
-  host: smtp-smtp-1
+  host: smtp.gmail.com
   # The port of the SMTP server.
   # > default is 25
-  port: 25
+  port: 587
   # Whether to use an insecure connection, an SSL/TLS (implicit) connection (generally
   # on port 465) or a STARTTLS (explicit) connection (generally on port 587) when
   # talking to the SMTP server.
   # > must be one of (ssl/tls, starttls)
-  encryption:
+  encryption: tls
   # The username to use for the SMTP server.
   # > default is ""
-  user: ""
+  user: "trivoalla@gmail.com"
   # The password to use for the SMTP server.
   # > default is ""
-  password: ""
+  password: "${SUPERLARSEN_SMTP_PASSWORD}"
   # Timeout in seconds for blocking operations like the connection attempt.
   timeout:
   # The path to a PEM-formatted certificate chain file to use for the connection.
