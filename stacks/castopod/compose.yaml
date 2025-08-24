@@ -1,8 +1,8 @@
 services:
   app:
-    image: castopod/castopod:latest
+    image: castopod/castopod:1.13.4
     volumes:
-      - castopod-media:/var/www/castopod/public/media
+      - /mnt/superlarsen/castopod/media:/var/www/castopod/public/media
     networks:
       - castopod-app
       - castopod-db
@@ -19,26 +19,16 @@ services:
     networks:
       - castopod-db
     volumes:
-      - castopod-db:/var/lib/mysql
-    environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-changeme}
-      MYSQL_DATABASE: ${MYSQL_DATABASE:-castopod}
-      MYSQL_USER: ${MYSQL_USER:-castopod}
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-castopod}
+      - /mnt/superlarsen/castopod/db:/var/lib/mysql
     restart: unless-stopped
 
   redis:
     image: redis:7.0-alpine
     command: --requirepass changeme
     volumes:
-      - castopod-cache:/data
+      - /mnt/superlarsen/castopod/cache:/data
     networks:
       - castopod-app
-
-volumes:
-  castopod-media:
-  castopod-db:
-  castopod-cache:
 
 networks:
   castopod-app:
