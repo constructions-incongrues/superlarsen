@@ -21,14 +21,17 @@ services:
     volumes:
       - /mnt/superlarsen/castopod/db:/var/lib/mysql
     restart: unless-stopped
+    env_file: .env
 
   redis:
     image: redis:7.0-alpine
     command: --requirepass changeme
+    env_file: .env
     volumes:
       - /mnt/superlarsen/castopod/cache:/data
     networks:
       - castopod-app
+    restart: unless-stopped
 
 networks:
   castopod-app:
