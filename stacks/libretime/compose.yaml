@@ -2,19 +2,12 @@ services:
   postgres:
     image: postgres:15
     volumes:
-      - postgres_data:/var/lib/postgresql/data
-    environment:
-      POSTGRES_USER: ${POSTGRES_USER:-libretime}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-libretime} # Change me !
+      - /mnt/superlarsen/libretime/postgres:/var/lib/postgresql/data
     healthcheck:
       test: pg_isready -U libretime
 
   rabbitmq:
     image: rabbitmq:3.13-alpine
-    environment:
-      RABBITMQ_DEFAULT_VHOST: ${RABBITMQ_DEFAULT_VHOST:-/libretime}
-      RABBITMQ_DEFAULT_USER: ${RABBITMQ_DEFAULT_USER:-libretime}
-      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_DEFAULT_PASS:-libretime} # Change me !
     healthcheck:
       test: nc -z 127.0.0.1 5672
 
@@ -27,7 +20,7 @@ services:
       - rabbitmq
     volumes:
       - ${LIBRETIME_CONFIG_FILEPATH:-./config.yml}:/etc/libretime/config.yml:ro
-      - libretime_playout:/app
+      - - /mnt/superlarsen/libretime/playout:/app
     environment:
       LIBRETIME_GENERAL_PUBLIC_URL: http://nginx:8080
     networks:
@@ -47,7 +40,7 @@ services:
       - rabbitmq
     volumes:
       - ${LIBRETIME_CONFIG_FILEPATH:-./config.yml}:/etc/libretime/config.yml:ro
-      - libretime_playout:/app
+      - - /mnt/superlarsen/libretime/playout:/app
     environment:
       LIBRETIME_GENERAL_PUBLIC_URL: http://nginx:8080
     networks:
@@ -62,7 +55,7 @@ services:
       - rabbitmq
     volumes:
       - ${LIBRETIME_CONFIG_FILEPATH:-./config.yml}:/etc/libretime/config.yml:ro
-      - libretime_storage:/srv/libretime
+      - /mnt/superlarsen/libretime/storage:/srv/libretime
     environment:
       LIBRETIME_GENERAL_PUBLIC_URL: http://nginx:8080
 
@@ -91,7 +84,7 @@ services:
       - rabbitmq
     volumes:
       - ${LIBRETIME_CONFIG_FILEPATH:-./config.yml}:/etc/libretime/config.yml:ro
-      - libretime_storage:/srv/libretime
+      - /mnt/superlarsen/libretime/storage:/srv/libretime
     networks:
       - default
       - smtp
@@ -106,7 +99,7 @@ services:
       - rabbitmq
     volumes:
       - ${LIBRETIME_CONFIG_FILEPATH:-./config.yml}:/etc/libretime/config.yml:ro
-      - libretime_storage:/srv/libretime
+      - /mnt/superlarsen/libretime/storage:/srv/libretime
     networks:
       - default
       - smtp
@@ -116,7 +109,7 @@ services:
     depends_on:
       - legacy
     volumes:
-      - libretime_storage:/srv/libretime:ro
+      - /mnt/superlarsen/libretime/storage:/srv/libretime:ro
     networks:
       - caddy
       - default
@@ -132,15 +125,6 @@ services:
     labels:
       caddy: icecast.superlarsen.fr
       caddy.reverse_proxy: "{{upstreams 8000}}"
-    environment:
-      ICECAST_SOURCE_PASSWORD: ${ICECAST_SOURCE_PASSWORD:-hackme} # Change me !
-      ICECAST_ADMIN_PASSWORD: ${ICECAST_ADMIN_PASSWORD:-hackme} # Change me !
-      ICECAST_RELAY_PASSWORD: ${ICECAST_RELAY_PASSWORD:-hackme} # Change me !
-
-volumes:
-  postgres_data: {}
-  libretime_storage: {}
-  libretime_playout: {}
 
 networks:
   caddy:
