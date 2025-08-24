@@ -5,11 +5,15 @@ services:
       - /mnt/superlarsen/libretime/postgres:/var/lib/postgresql/data
     healthcheck:
       test: pg_isready -U libretime
+    env_file: .env
+    restart: unless-stopped
 
   rabbitmq:
     image: rabbitmq:3.13-alpine
     healthcheck:
       test: nc -z 127.0.0.1 5672
+    env_file: .env
+    restart: unless-stopped
 
   playout:
     image: ghcr.io/libretime/libretime-playout:${LIBRETIME_VERSION:-latest}
@@ -26,6 +30,8 @@ services:
     networks:
       - default
       - smtp
+    env_file: .env
+    restart: unless-stopped
 
   liquidsoap:
     image: ghcr.io/libretime/libretime-playout:${LIBRETIME_VERSION:-latest}
@@ -45,6 +51,8 @@ services:
       LIBRETIME_GENERAL_PUBLIC_URL: http://nginx:8080
     networks:
       - default
+    env_file: .env
+    restart: unless-stopped
 
   analyzer:
     image: ghcr.io/libretime/libretime-analyzer:${LIBRETIME_VERSION:-latest}
@@ -73,6 +81,8 @@ services:
     networks:
       - default
       - smtp
+    env_file: .env
+    restart: unless-stopped
 
   api:
     image: ghcr.io/libretime/libretime-api:${LIBRETIME_VERSION:-latest}
@@ -88,6 +98,8 @@ services:
     networks:
       - default
       - smtp
+    env_file: .env
+    restart: unless-stopped
 
   legacy:
     image: ghcr.io/libretime/libretime-legacy:${LIBRETIME_VERSION:-latest}
@@ -103,6 +115,8 @@ services:
     networks:
       - default
       - smtp
+    env_file: .env
+    restart: unless-stopped
 
   nginx:
     image: ghcr.io/libretime/libretime-nginx:${LIBRETIME_VERSION:-latest}
@@ -116,6 +130,8 @@ services:
     labels:
       caddy: libretime.superlarsen.fr
       caddy.reverse_proxy: "{{upstreams 8080}}"
+    env_file: .env
+    restart: unless-stopped
 
   icecast:
     image: ghcr.io/libretime/icecast:2.4.4
@@ -125,6 +141,8 @@ services:
     labels:
       caddy: icecast.superlarsen.fr
       caddy.reverse_proxy: "{{upstreams 8000}}"
+    env_file: .env
+    restart: unless-stopped
 
 networks:
   caddy:
