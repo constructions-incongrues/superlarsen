@@ -14,8 +14,8 @@ data "hcloud_server" "cartons" {
 
 resource "hcloud_volume" "superlarsen" {
   name      = "superlarsen"
-  size      = 10 # Taille en Go
-  location  = "fsn1" # Remplace par la localisation de ton serveur
+  size      = 10 
+  location  = "hel1-dc2"
   format    = "ext4"
 }
 
