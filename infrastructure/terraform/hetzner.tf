@@ -19,6 +19,7 @@ resource "hcloud_volume" "superlarsen" {
   format    = "ext4"
   automount = true
   delete_protection = true
+  server_id = data.hcloud_server.cartons.id
 }
 
 resource "hcloud_volume_attachment" "superlarsen_attachment" {
