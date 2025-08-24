@@ -17,6 +17,8 @@ resource "hcloud_volume" "superlarsen" {
   size      = 10 
   location  = "hel1-dc2"
   format    = "ext4"
+  automount = true
+  delete_protection = true
 }
 
 resource "hcloud_volume_attachment" "superlarsen_attachment" {
