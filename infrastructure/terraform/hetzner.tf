@@ -15,7 +15,6 @@ data "hcloud_server" "cartons" {
 resource "hcloud_volume" "superlarsen" {
   name      = "superlarsen"
   size      = 10 
-  location  = "hel1-dc2"
   format    = "ext4"
   automount = true
   delete_protection = true
