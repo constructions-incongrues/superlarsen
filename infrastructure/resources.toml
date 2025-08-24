@@ -41,7 +41,7 @@ linked_repo = "superlarsen-main"
 webhook_force_deploy = true
 run_directory = "stacks/libretime"
 pre_deploy.command = """
-/bin/bash -a -c "source ./.env; envsubst < config.template.yml > config.yml"
+/bin/bash -a -c "apt update && apt install -y gettext && source ./.env; envsubst < config.template.yml > config.yml"
 docker compose -p superlarsen-libretime -f compose.yaml run --rm api libretime-api migrate
 """
 environment = """
