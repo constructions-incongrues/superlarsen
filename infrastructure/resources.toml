@@ -7,7 +7,6 @@ links = [
   "https://castopod.superlarsen.fr"
 ]
 linked_repo = "superlarsen-main"
-webhook_secret = "[[SUPERLARSEN_CASTOPOD_WEBHOOK_SECRET]]"
 run_directory = "stacks/castopod"
 environment = """
 MYSQL_DATABASE=castopod
@@ -39,7 +38,6 @@ links = [
   "https://libretime.superlarsen.fr"
 ]
 linked_repo = "superlarsen-main"
-webhook_secret = "[[SUPERLARSEN_LIBRETIME_WEBHOOK_SECRET]]"
 webhook_force_deploy = true
 run_directory = "stacks/libretime"
 pre_deploy.command = """
@@ -83,7 +81,6 @@ tags = ["superlarsen"]
 server = "cartons"
 links = ["https://www.superlarsen.fr"]
 linked_repo = "superlarsen-main"
-webhook_secret = "[[SUPERLARSEN_WORDPRESS_WEBHOOK_SECRET]]"
 run_directory = "stacks/wordpress"
 environment = """
 WORDPRESS_DB_USER=superlarsen
