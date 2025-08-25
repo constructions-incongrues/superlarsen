@@ -12,7 +12,7 @@
 - Déploiement des stacks applicatifs : <https://cartons.pastis-hosting.net/stacks>
 - Infrastructure : <https://app.terraform.io/app/constructions-incongrues/workspaces/superlarsen>
 
-## Stacks applicatif
+## Stacks
 
 ### libretime
 
