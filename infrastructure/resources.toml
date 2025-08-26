@@ -110,7 +110,8 @@ tags = ["superlarsen"]
 [resource_sync.config]
 linked_repo = "superlarsen-main"
 resource_path = [
-  "infrastructure/resources.toml"
+  "infrastructure/resources.toml",
+  "stacks"
 ]
 managed = true
 match_tags = ["superlarsen"]
