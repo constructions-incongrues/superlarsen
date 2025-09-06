@@ -61,6 +61,7 @@ services:
       nofile: 1024
     depends_on:
       - rabbitmq
+    env_file: .env
     volumes:
       - ${LIBRETIME_CONFIG_FILEPATH:-./config.yml}:/etc/libretime/config.yml:ro
       - /mnt/superlarsen/libretime/storage:/srv/libretime

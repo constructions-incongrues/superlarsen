@@ -62,10 +62,10 @@ rabbitmq:
   port: 5672
   # The virtual host of RabbitMQ server.
   # > default is /libretime
-  vhost: /
+  vhost: ${RABBITMQ_DEFAULT_VHOST}
   # The username of the RabbitMQ user.
   # > default is libretime
-  user: libretime
+  user: ${RABBITMQ_DEFAULT_USER}
   # The password of the RabbitMQ user.
   # > default is libretime
   password: ${RABBITMQ_DEFAULT_PASS}
