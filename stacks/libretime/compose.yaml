@@ -67,6 +67,7 @@ services:
       - /mnt/superlarsen/libretime/storage:/srv/libretime
     environment:
       LIBRETIME_GENERAL_PUBLIC_URL: http://nginx:8080
+    restart: unless-stopped
 
   worker:
     image: ghcr.io/libretime/libretime-worker:${LIBRETIME_VERSION:-latest}
