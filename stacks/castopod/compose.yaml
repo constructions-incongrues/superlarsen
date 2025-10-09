@@ -42,6 +42,8 @@ services:
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock:ro
       - ./cache:/cache
+    networks:
+      - castopod-db
 
 networks:
   castopod-app:
