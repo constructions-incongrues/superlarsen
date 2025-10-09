@@ -1,0 +1,32 @@
+services:
+  mysql:
+    image: mysql:9.2
+    volumes:
+      - mysql-data:/var/lib/mysql
+    env_file: .env
+    restart: unless-stopped
+
+  bookstack:
+    image: solidnerd/bookstack:25.7.3
+    depends_on:
+      - mysql
+    volumes:
+    - /mnt/superlarsen/bookstack/public-uploads:/var/www/bookstack/public/uploads
+    - /mnt/superlarsen/bookstack/storage-uploads:/var/www/bookstack/public/uploads
+    networks:
+      - caddy
+      - default
+      - smtp
+    env_file: .env
+    restart: unless-stopped
+    labels:
+      caddy: wiki.superlarsen.fr
+      caddy.reverse_proxy: "{{upstreams 8080}}"
+volumes:
+ mysql-data:
+
+networks:
+  caddy:
+    external: true
+  smtp:
+    external: true
