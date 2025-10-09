@@ -3,8 +3,11 @@ services:
     image: mysql:9.2
     volumes:
       - mysql-data:/var/lib/mysql
+    labels:
+      restic-compose-backup.mysql: true
     env_file: .env
     restart: unless-stopped
+
 
   bookstack:
     image: solidnerd/bookstack:25.7.3
@@ -22,6 +25,13 @@ services:
     labels:
       caddy: wiki.superlarsen.fr
       caddy.reverse_proxy: "{{upstreams 8080}}"
+
+  backup:
+    image: zettaio/restic-compose-backup:0.7.1
+    env_file: .env
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - ./cache:/cache
 
 volumes:
   mysql-data:
