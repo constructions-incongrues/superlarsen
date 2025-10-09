@@ -3,6 +3,11 @@ provider "cloudflare" {
   api_token = var.cloudflare_api_token
 }
 
+provider "cloudflare" {
+  alias     = "r2"
+  api_token = var.cloudflare_r2_api_token
+}
+
 # Variables
 variable "cloudflare_api_token" {
   description = "Token API Cloudflare"
@@ -19,6 +24,12 @@ variable "domain_name" {
 variable "zone_id" {
   description = "ID de la zone Cloudflare"
   type        = string
+}
+
+variable "cloudflare_r2_api_token" {
+  description = "Jeton d'API R2 Cloudflare"
+  type        = string
+  sensitive   = true
 }
 
 variable "cloudflare_r2_access_key" {
@@ -100,6 +111,7 @@ resource "cloudflare_record" "wiki" {
 resource "cloudflare_r2_bucket" "superlarsen" {
   account_id = var.cloudflare_account_id
   name       = "superlarsen"
+  provider = cloudflare.r2
   lifecycle {
     prevent_destroy = true
   }
