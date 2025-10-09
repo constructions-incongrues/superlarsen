@@ -8,7 +8,6 @@ services:
     env_file: .env
     restart: unless-stopped
 
-
   bookstack:
     image: solidnerd/bookstack:25.7.3
     depends_on:
