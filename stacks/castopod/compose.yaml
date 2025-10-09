@@ -22,8 +22,8 @@ services:
     volumes:
       - /mnt/superlarsen/castopod/db:/var/lib/mysql
     labels:
-      - restic-compose-backup.mariadb: true
-      - restic-compose-backup.volumes: true
+      restic-compose-backup.mariadb: true
+      restic-compose-backup.volumes: true
     restart: unless-stopped
     env_file: .env
 
