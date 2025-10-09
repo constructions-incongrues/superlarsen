@@ -116,6 +116,7 @@ output "zone_info" {
 }
 
 output "r2_bucket_info" {
+  sensitive = true
   description = "Informations sur le bucket R2"
   value = {
     bucket_name = cloudflare_r2_bucket.superlarsen_backups.name
