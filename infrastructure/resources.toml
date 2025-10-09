@@ -115,3 +115,27 @@ resource_path = [
 ]
 managed = true
 match_tags = ["superlarsen"]
+
+##
+
+[[stack]]
+name = "superlarsen-bookstack"
+tags = ["superlarsen"]
+[stack.config]
+server = "cartons"
+links = ["https://wiki.superlarsen.fr"]
+linked_repo = "superlarsen-main"
+run_directory = "stacks/bookstack"
+environment = """
+APP_KEY=[[APP_KEY]]
+APP_URL=https://wiki.superlarsen.fr
+DB_DATABASE=bookstack
+DB_HOST=mysql:3306
+DB_PASSWORD=[[SUPERLARSEN_BOOSTACK_MYSQL_PASSWORD]]
+DB_USERNAME=bookstack
+MYSQL_DATABASE=bookstack
+MYSQL_PASSWORD=[[SUPERLARSEN_BOOSTACK_MYSQL_PASSWORD]]
+MYSQL_ROOT_PASSWORD=[[SUPERLARSEN_BOOSTACK_MYSQL_ROOT_PASSWORD]]
+MYSQL_USER=bookstack
+"""
+
