@@ -3,6 +3,9 @@ services:
     image: postgres:15
     volumes:
       - /mnt/superlarsen/libretime/postgres:/var/lib/postgresql/data
+    labels:
+      restic-compose-backup.postgres: true
+      restic-compose-backup.volumes: true
     healthcheck:
       test: pg_isready -U libretime
     env_file: .env
@@ -25,6 +28,8 @@ services:
     volumes:
       - ${LIBRETIME_CONFIG_FILEPATH:-./config.yml}:/etc/libretime/config.yml:ro
       - /mnt/superlarsen/libretime/playout:/app
+    labels:
+      restic-compose-backup.volumes: true=label
     environment:
       LIBRETIME_GENERAL_PUBLIC_URL: http://nginx:8080
     networks:
@@ -114,6 +119,8 @@ services:
     volumes:
       - ${LIBRETIME_CONFIG_FILEPATH:-./config.yml}:/etc/libretime/config.yml:ro
       - /mnt/superlarsen/libretime/storage:/srv/libretime
+    labels:
+      restic-compose-backup.volumes: true
     networks:
       - default
       - smtp
@@ -145,6 +152,13 @@ services:
       caddy.reverse_proxy: "{{upstreams 8000}}"
     env_file: .env
     restart: unless-stopped
+
+  backup:
+    image: zettaio/restic-compose-backup:0.7.1
+    env_file: .env
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - ./cache:/cache
 
 networks:
   caddy:

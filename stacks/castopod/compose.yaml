@@ -13,6 +13,7 @@ services:
     labels:
       caddy: castopod.superlarsen.fr
       caddy.reverse_proxy: "{{upstreams 8000}}"
+      restic-compose-backup.volumes: true
 
   mariadb:
     image: mariadb:10.5
@@ -20,6 +21,9 @@ services:
       - castopod-db
     volumes:
       - /mnt/superlarsen/castopod/db:/var/lib/mysql
+    labels:
+      - restic-compose-backup.mariadb: true
+      - restic-compose-backup.volumes: true
     restart: unless-stopped
     env_file: .env
 
@@ -32,6 +36,13 @@ services:
     networks:
       - castopod-app
     restart: unless-stopped
+
+  backup:
+    image: zettaio/restic-compose-backup:0.7.1
+    env_file: .env
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - ./cache:/cache
 
 networks:
   castopod-app:

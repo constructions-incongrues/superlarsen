@@ -5,6 +5,7 @@ services:
       - mysql-data:/var/lib/mysql
     labels:
       restic-compose-backup.mysql: true
+      restic-compose-backup.volumes: true
     env_file: .env
     restart: unless-stopped
 
@@ -24,6 +25,7 @@ services:
     labels:
       caddy: wiki.superlarsen.fr
       caddy.reverse_proxy: "{{upstreams 8080}}"
+      restic-compose-backup.volumes: true
 
   backup:
     image: zettaio/restic-compose-backup:0.7.1
