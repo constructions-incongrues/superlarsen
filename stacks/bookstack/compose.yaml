@@ -5,7 +5,6 @@ services:
       - mysql-data:/var/lib/mysql
     labels:
       restic-compose-backup.mysql: true
-      restic-compose-backup.volumes: true
     env_file: .env
     restart: unless-stopped
 

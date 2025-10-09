@@ -33,7 +33,6 @@ services:
     volumes:
       - /mnt/superlarsen/wordpress/db:/var/lib/mysql
     labels:
-      restic-compose-backup.volumes: true
       restic-compose-backup.mysql: true
 
   backup:
