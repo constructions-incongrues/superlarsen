@@ -42,7 +42,7 @@ data "cloudflare_zone" "main" {
   zone_id = var.zone_id
 }
 
-# Enregistrement CNAME
+# Enregistrements CNAME
 resource "cloudflare_record" "libretime" {
   zone_id = data.cloudflare_zone.main.id
   name    = "libretime"
@@ -91,11 +91,12 @@ resource "cloudflare_record" "status" {
 resource "cloudflare_record" "wiki" {
   zone_id = data.cloudflare_zone.main.id
   name    = "wiki"
-  content = "constructions-incongrues.github.io"
+  content = "cartons.pastis-hosting.net"
   type    = "CNAME"
   ttl     = 300
   proxied = false
 }
+
 
 # Outputs
 output "zone_info" {
