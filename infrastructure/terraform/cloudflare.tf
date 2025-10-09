@@ -79,7 +79,7 @@ resource "cloudflare_r2_bucket" "superlarsen" {
 resource "cloudflare_r2_bucket" "superlarsen_backups" {
   provider   = cloudflare.r2
   account_id = var.cloudflare_account_id
-  name       = "superlarsen_backups"
+  name       = "superlarsen-backups"
   location   = "WEUR"
 }
 
@@ -99,5 +99,14 @@ output "r2_bucket_info" {
     bucket_name = cloudflare_r2_bucket.superlarsen.name
     bucket_id   = cloudflare_r2_bucket.superlarsen.id
     location    = cloudflare_r2_bucket.superlarsen.location
+  }
+}
+
+output "r2_bucket_backup_info" {
+  description = "Informations sur le bucket R2"
+  value = {
+    bucket_name = cloudflare_r2_bucket.superlarsen_backups.name
+    bucket_id   = cloudflare_r2_bucket.superlarsen_backups.id
+    location    = cloudflare_r2_bucket.superlarsen_backups.location
   }
 }
