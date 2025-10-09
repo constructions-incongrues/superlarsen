@@ -97,9 +97,9 @@ resource "cloudflare_record" "wiki" {
   proxied = false
 }
 
-resource "cloudflare_r2_bucket" "superlarsen_backups" {
+resource "cloudflare_r2_bucket" "superlarsen" {
   account_id = var.cloudflare_account_id
-  name       = "superlarsen-backups"
+  name       = "superlarsen"
   lifecycle {
     prevent_destroy = true
   }
