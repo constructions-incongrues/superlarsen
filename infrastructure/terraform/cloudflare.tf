@@ -75,6 +75,14 @@ resource "cloudflare_r2_bucket" "superlarsen" {
   location   = "WEUR"
 }
 
+# Bucket R2 avec le provider R2 backups
+resource "cloudflare_r2_bucket" "superlarsen_backups" {
+  provider   = cloudflare.r2
+  account_id = var.cloudflare_account_id
+  name       = "superlarsen_backups"
+  location   = "WEUR"
+}
+
 # Outputs
 output "zone_info" {
   description = "Informations sur la zone DNS"
