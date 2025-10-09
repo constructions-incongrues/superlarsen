@@ -97,13 +97,31 @@ resource "cloudflare_record" "wiki" {
   proxied = false
 }
 
+resource "cloudflare_r2_bucket" "superlarsen_backups" {
+  account_id = var.cloudflare_account_id
+  name       = "superlarsen-backups"
+  lifecycle {
+    prevent_destroy = true
+  }
+}
 
 # Outputs
 output "zone_info" {
-  description = "Informations sur la zone"
+  description = "Informations sur la zone DNS"
   value = {
     zone_id = data.cloudflare_zone.main.id
     name    = data.cloudflare_zone.main.name
     status  = data.cloudflare_zone.main.status
+  }
+}
+
+output "r2_bucket_info" {
+  description = "Informations sur le bucket R2"
+  value = {
+    bucket_name = cloudflare_r2_bucket.superlarsen_backups.name
+    bucket_id   = cloudflare_r2_bucket.superlarsen_backups.id
+    access_key  = var.cloudflare_r2_access_key
+    secret_key  = var.cloudflare_r2_secret_key
+    endpoint    = "https://${var.cloudflare_account_id}.r2.cloudflarestorage.com"
   }
 }
