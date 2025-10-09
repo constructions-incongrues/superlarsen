@@ -88,6 +88,15 @@ resource "cloudflare_record" "status" {
   proxied = false
 }
 
+resource "cloudflare_record" "wiki" {
+  zone_id = data.cloudflare_zone.main.id
+  name    = "wiki"
+  content = "constructions-incongrues.github.io"
+  type    = "CNAME"
+  ttl     = 300
+  proxied = false
+}
+
 # Outputs
 output "zone_info" {
   description = "Informations sur la zone"
