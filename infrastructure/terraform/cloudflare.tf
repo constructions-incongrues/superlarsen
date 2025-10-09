@@ -112,9 +112,7 @@ resource "cloudflare_r2_bucket" "superlarsen" {
   account_id = var.cloudflare_account_id
   name       = "superlarsen"
   provider = cloudflare.r2
-  lifecycle {
-    prevent_destroy = true
-  }
+  location = "eeur"
 }
 
 # Outputs
