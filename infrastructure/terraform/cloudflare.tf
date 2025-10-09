@@ -28,7 +28,7 @@ variable "domain_name" {
   default     = "example.com"
 }
 
-variable "zone_id" {
+variable "cloudflare_zone_id" {
   description = "ID de la zone Cloudflare"
   type        = string
 }
@@ -40,7 +40,7 @@ variable "cloudflare_account_id" {
 
 # Data source pour la zone
 data "cloudflare_zone" "main" {
-  zone_id = var.zone_id
+  zone_id = var.cloudflare_zone_id
 }
 
 # Enregistrements DNS
@@ -58,7 +58,7 @@ locals {
 resource "cloudflare_record" "cnames" {
   for_each = local.cname_records
 
-  zone_id = data.cloudflare_zone.main.id
+  zone_id = data.cloudflare_zone.main.id  
   name    = each.key
   content = each.value
   type    = "CNAME"
