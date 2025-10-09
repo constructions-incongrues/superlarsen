@@ -112,7 +112,7 @@ resource "cloudflare_r2_bucket" "superlarsen" {
   account_id = var.cloudflare_account_id
   name       = "superlarsen"
   provider = cloudflare.r2
-  location = "eeur"
+  location = "EEUR"
 }
 
 # Outputs
