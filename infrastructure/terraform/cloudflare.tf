@@ -119,8 +119,8 @@ output "r2_bucket_info" {
   sensitive = true
   description = "Informations sur le bucket R2"
   value = {
-    bucket_name = cloudflare_r2_bucket.superlarsen_backups.name
-    bucket_id   = cloudflare_r2_bucket.superlarsen_backups.id
+    bucket_name = cloudflare_r2_bucket.superlarsen.name
+    bucket_id   = cloudflare_r2_bucket.superlarsen.id
     access_key  = var.cloudflare_r2_access_key
     secret_key  = var.cloudflare_r2_secret_key
     endpoint    = "https://${var.cloudflare_account_id}.r2.cloudflarestorage.com"
