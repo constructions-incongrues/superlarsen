@@ -14,19 +14,24 @@
 
 ## Stacks
 
-### libretime
+### bookstack
 
-- [libretime](./stacks/libretime/)
-- <https://cartons.pastis-hosting.net/stacks/6895ceb9dffe250360ab3f2e>
-- <https://libretime.superlarsen.fr>
-- <https://icecast.superlarsen.fr>
-
+- [bookstack](./stacks/bookstack/)
+- <https://cartons.pastis-hosting.net/stacks/68e7e547a8d8ffe5d97c1bd2>
+- <https://wiki.superlarsen.fr>
 
 ### castopod
 
 - [castopod](./stacks/castopod/)
 - <https://cartons.pastis-hosting.net/stacks/68961ec43f85f8cb80eccfa8>
 - <https://castopod.superlarsen.fr>
+
+### libretime
+
+- [libretime](./stacks/libretime/)
+- <https://cartons.pastis-hosting.net/stacks/6895ceb9dffe250360ab3f2e>
+- <https://libretime.superlarsen.fr>
+- <https://icecast.superlarsen.fr>
 
 ### wordpress
 

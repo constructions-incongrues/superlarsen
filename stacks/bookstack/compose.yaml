@@ -12,7 +12,7 @@ services:
       - mysql
     volumes:
     - /mnt/superlarsen/bookstack/public-uploads:/var/www/bookstack/public/uploads
-    - /mnt/superlarsen/bookstack/storage-uploads:/var/www/bookstack/public/uploads
+    - /mnt/superlarsen/bookstack/storage-uploads:/var/www/bookstack/storage/uploads
     networks:
       - caddy
       - default
