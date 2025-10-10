@@ -35,7 +35,6 @@ services:
       LIBRETIME_GENERAL_PUBLIC_URL: http://nginx:8080
     networks:
       - default
-      - smtp
     env_file: .env
     restart: unless-stopped
 
@@ -88,7 +87,6 @@ services:
       LIBRETIME_GENERAL_PUBLIC_URL: http://nginx:8080
     networks:
       - default
-      - smtp
     env_file: .env
     restart: unless-stopped
 
@@ -105,7 +103,6 @@ services:
       - /mnt/superlarsen/libretime/storage:/srv/libretime
     networks:
       - default
-      - smtp
     env_file: .env
     restart: unless-stopped
 
@@ -124,7 +121,6 @@ services:
       restic-compose-backup.volumes: true
     networks:
       - default
-      - smtp
     env_file: .env
     restart: unless-stopped
 
@@ -163,6 +159,4 @@ services:
 
 networks:
   caddy:
-    external: true
-  smtp:
     external: true

@@ -7,7 +7,6 @@ services:
       - castopod-app
       - castopod-db
       - caddy
-      - smtp
     restart: unless-stopped
     env_file: .env
     labels:
