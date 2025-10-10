@@ -118,7 +118,7 @@ services:
       - ${LIBRETIME_CONFIG_FILEPATH:-./config.yml}:/etc/libretime/config.yml:ro
       - /mnt/superlarsen/libretime/storage:/srv/libretime
     labels:
-      restic-compose-backup.volumes: true
+      restic-compose-backup.volumes: false
     networks:
       - default
     env_file: .env
