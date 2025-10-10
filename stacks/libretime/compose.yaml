@@ -1,6 +1,8 @@
 services:
   postgres:
     image: postgres:15
+    environment:
+      POSTGRES_DB: libretime
     volumes:
       - /mnt/superlarsen/libretime/postgres:/var/lib/postgresql/data
     labels:
