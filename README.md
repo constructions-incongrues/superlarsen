@@ -1,6 +1,6 @@
 # Superlarsen : IaC & Config management
 
-## Outils de gestion
+## Control Plane
 
 ### État des services
 
