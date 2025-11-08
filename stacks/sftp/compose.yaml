@@ -1,7 +1,7 @@
 services:
 
   sftp:
-    image: atmoz/sftp;alpine
+    image: atmoz/sftp:alpine
     restart: always
     volumes:
       - ./users.conf:/etc/sftp/users.conf:ro
