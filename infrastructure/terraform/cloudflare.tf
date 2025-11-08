@@ -46,12 +46,13 @@ data "cloudflare_zone" "main" {
 # Enregistrements DNS
 locals {
   cname_records = {
-    libretime = "cartons.pastis-hosting.net"
-    icecast   = "cartons.pastis-hosting.net"
     castopod  = "cartons.pastis-hosting.net"
-    www       = "cartons.pastis-hosting.net"
-    wiki      = "cartons.pastis-hosting.net"
+    icecast   = "cartons.pastis-hosting.net"
+    libretime = "cartons.pastis-hosting.net"
+    sftp      = "cartons.pastis-hosting.net"
     status    = "constructions-incongrues.github.io"
+    wiki      = "cartons.pastis-hosting.net"
+    www       = "cartons.pastis-hosting.net"
   }
 }
 
