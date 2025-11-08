@@ -12,9 +12,6 @@ services:
     networks:
       - caddy
       - default
-    labels:
-      caddy: sftp.superlarsen.fr
-      caddy.reverse_proxy: "{{upstreams 22}}"
 
 networks:
   caddy:
