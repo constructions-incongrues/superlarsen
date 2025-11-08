@@ -153,6 +153,17 @@ EMAIL_SEND_TO=tristan@rivoallan.net
 ##
 
 [[stack]]
+name = "superlarsen-sftp"
+tags = ["superlarsen"]
+[stack.config]
+server = "cartons"
+links = ["sftp://sftp.superlarsen.fr"]
+linked_repo = "superlarsen-main"
+run_directory = "stacks/sftp"
+
+##
+
+[[stack]]
 name = "superlarsen-wordpress"
 tags = ["superlarsen"]
 [stack.config]
