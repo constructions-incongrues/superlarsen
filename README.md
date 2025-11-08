@@ -33,6 +33,12 @@
 - <https://libretime.superlarsen.fr>
 - <https://icecast.superlarsen.fr>
 
+### sftp
+
+- [sftp](./stacks/sftp/)
+- <https://cartons.pastis-hosting.net/stacks/690f80656eba66e67ff936e7>
+- <sftp://sftp.superlarsen.fr:2222>
+
 ### wordpress
 
 - [wordpress](./stacks/wordpress/)
