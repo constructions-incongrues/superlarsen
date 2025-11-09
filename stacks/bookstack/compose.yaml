@@ -4,7 +4,7 @@ services:
     volumes:
       - mysql-data:/var/lib/mysql
     labels:
-      restic-compose-backup.mysql: true
+      stack-back.mysql: true
     env_file: .env
     restart: unless-stopped
 
@@ -23,10 +23,10 @@ services:
     labels:
       caddy: wiki.superlarsen.fr
       caddy.reverse_proxy: "{{upstreams 8080}}"
-      restic-compose-backup.volumes: true
+      stack-back.volumes: true
 
   backup:
-    image: zettaio/restic-compose-backup:0.7.1
+    image: ghcr.io/lawndoc/stack-back:1.4.5
     env_file: .env
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock:ro

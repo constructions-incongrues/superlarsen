@@ -18,7 +18,7 @@ services:
     labels:
       caddy: www.superlarsen.fr
       caddy.reverse_proxy: "{{upstreams 80}}"
-      restic-compose-backup.volumes: true
+      stack-back.volumes: true
 
 
   db:
@@ -32,10 +32,10 @@ services:
     volumes:
       - /mnt/superlarsen/wordpress/db:/var/lib/mysql
     labels:
-      restic-compose-backup.mysql: true
+      stack-back.mysql: true
 
   backup:
-    image: zettaio/restic-compose-backup:0.7.1
+    image: ghcr.io/lawndoc/stack-back:1.4.5
     env_file: .env
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock:ro

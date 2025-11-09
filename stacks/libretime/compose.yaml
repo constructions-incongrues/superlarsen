@@ -6,7 +6,7 @@ services:
     volumes:
       - /mnt/superlarsen/libretime/postgres:/var/lib/postgresql/data
     labels:
-      restic-compose-backup.postgres: true
+      stack-back.postgres: true
     healthcheck:
       test: pg_isready -U libretime
     env_file: .env
@@ -30,7 +30,7 @@ services:
       - ${LIBRETIME_CONFIG_FILEPATH:-./config.yml}:/etc/libretime/config.yml:ro
       - /mnt/superlarsen/libretime/playout:/app
     labels:
-      restic-compose-backup.volumes: true=label
+      stack-back.volumes: true=label
     environment:
       LIBRETIME_GENERAL_PUBLIC_URL: http://nginx:8080
     networks:
@@ -118,7 +118,7 @@ services:
       - ${LIBRETIME_CONFIG_FILEPATH:-./config.yml}:/etc/libretime/config.yml:ro
       - /mnt/superlarsen/libretime/storage:/srv/libretime
     labels:
-      restic-compose-backup.volumes: false
+      stack-back.volumes: false
     networks:
       - default
     env_file: .env
@@ -151,7 +151,7 @@ services:
     restart: unless-stopped
 
   backup:
-    image: zettaio/restic-compose-backup:0.7.1
+    image: ghcr.io/lawndoc/stack-back:1.4.5
     env_file: .env
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock:ro
