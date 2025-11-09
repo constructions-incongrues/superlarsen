@@ -26,7 +26,7 @@ services:
       stack-back.volumes: true
 
   backup:
-    image: ghcr.io/lawndoc/stack-back:1.4.5
+    image: ghcr.io/lawndoc/stack-back:v1.4.5
     env_file: .env
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock:ro
