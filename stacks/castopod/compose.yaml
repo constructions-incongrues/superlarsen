@@ -1,6 +1,6 @@
 services:
   app:
-    image: castopod/castopod:1.13.4
+    image: castopod/castopod:1.13.7
     volumes:
       - /mnt/superlarsen/castopod/media:/var/www/castopod/public/media
     networks:
