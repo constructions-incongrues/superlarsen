@@ -1,8 +1,8 @@
 services:
   app:
-    image: castopod/castopod:1.13.7
+    image: castopod/castopod:1.15.0
     volumes:
-      - /mnt/superlarsen/castopod/media:/var/www/castopod/public/media
+      - /mnt/superlarsen/castopod/media:/app/public/media
     networks:
       - castopod-app
       - castopod-db
@@ -11,7 +11,7 @@ services:
     env_file: .env
     labels:
       caddy: castopod.superlarsen.fr
-      caddy.reverse_proxy: "{{upstreams 8000}}"
+      caddy.reverse_proxy: "{{upstreams 8080}}"
       stack-back.volumes: true
 
   mariadb:
