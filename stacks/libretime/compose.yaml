@@ -147,6 +147,7 @@ services:
     labels:
       caddy: icecast.superlarsen.fr
       caddy.reverse_proxy: "{{upstreams 8000}}"
+      caddy.header.Access-Control-Allow-Origin: "*"
     env_file: .env
     restart: unless-stopped
 

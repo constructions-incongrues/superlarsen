@@ -15,6 +15,18 @@ Deployments are triggered automatically by **Cartons** (https://cartons.pastis-h
 - DNS: all domains CNAME to `cartons.pastis-hosting.net`, served through Caddy (reverse proxy on the server, auto-configured via Docker labels)
 - Terraform manages the Hetzner volume and Cloudflare DNS/R2 buckets; state is in Terraform Cloud (`constructions-incongrues/superlarsen` workspace)
 
+## Linting
+
+Trunk is the linter runner. Active linters: `checkov` (IaC security), `markdownlint`, `prettier`, `taplo` (TOML), `tflint`, `trufflehog` (secrets), `yamllint`.
+
+```bash
+trunk check        # lint all changed files
+trunk check --all  # lint everything
+trunk fmt          # auto-format
+```
+
+Trunk runs `trunk-fmt-pre-commit` and `trunk-check-pre-push` hooks automatically.
+
 ## Terraform
 
 ```bash
@@ -23,6 +35,10 @@ terraform init
 terraform plan
 terraform apply
 ```
+
+## How changes propagate
+
+Cartons picks up changes via a `resource_sync` block in `resources.toml` that watches `infrastructure/resources.toml` and `stacks/`. Pushing to `main` triggers a sync — no manual Cartons UI step needed.
 
 ## Key files
 
@@ -50,7 +66,12 @@ When editing `stacks/libretime/`, keep `config.template.yml` as the source of tr
 
 ## Backups
 
-Every stack (except sftp) includes a `stack-back` service (ghcr.io/lawndoc/stack-back:v1.4.5) that runs Restic backups daily at 01:00 UTC to Cloudflare R2. Retention: 7 daily / 4 weekly / 12 monthly / 3 yearly.
+Every stack (except sftp) includes a `stack-back` service (`ghcr.io/lawndoc/stack-back:v1.4.5`) that runs Restic backups daily at 01:00 UTC to Cloudflare R2. Retention: 7 daily / 4 weekly / 12 monthly / 3 yearly.
+
+Services opt in to backups via Docker labels:
+
+- `stack-back.volumes: true` — backs up named/bind volumes on that service
+- `stack-back.mysql: true` / `stack-back.postgres: true` — dumps the database before backup
 
 ## Networking
 
