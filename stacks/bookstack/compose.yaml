@@ -9,12 +9,12 @@ services:
     restart: unless-stopped
 
   bookstack:
-    image: solidnerd/bookstack:25.7.3
+    image: solidnerd/bookstack:26.9.2
     depends_on:
       - mysql
     volumes:
-    - /mnt/superlarsen/bookstack/public-uploads:/var/www/bookstack/public/uploads
-    - /mnt/superlarsen/bookstack/storage-uploads:/var/www/bookstack/storage/uploads
+      - /mnt/superlarsen/bookstack/public-uploads:/var/www/bookstack/public/uploads
+      - /mnt/superlarsen/bookstack/storage-uploads:/var/www/bookstack/storage/uploads
     networks:
       - caddy
       - default
