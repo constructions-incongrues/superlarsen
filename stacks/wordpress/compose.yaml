@@ -1,10 +1,7 @@
 services:
-
   wordpress:
     image: wordpress
     restart: always
-    ports:
-      - 8000:80
     environment:
       WORDPRESS_DB_HOST: db
       WORDPRESS_DB_USER: ${WORDPRESS_DB_USER:-exampleuser}
@@ -20,7 +17,6 @@ services:
       caddy.reverse_proxy: "{{upstreams 80}}"
       stack-back.volumes: true
 
-
   db:
     image: mysql:8.0
     restart: always
@@ -28,7 +24,7 @@ services:
       MYSQL_DATABASE: ${MYSQL_DATABASE:-exampledb}
       MYSQL_USER: ${MYSQL_USER:-exampleuser}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD:-examplepass}
-      MYSQL_RANDOM_ROOT_PASSWORD: '1'
+      MYSQL_RANDOM_ROOT_PASSWORD: "1"
     volumes:
       - /mnt/superlarsen/wordpress/db:/var/lib/mysql
     labels:
