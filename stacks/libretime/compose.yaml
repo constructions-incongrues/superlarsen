@@ -117,6 +117,9 @@ services:
     volumes:
       - ${LIBRETIME_CONFIG_FILEPATH:-./config.yml}:/etc/libretime/config.yml:ro
       - /mnt/superlarsen/libretime/storage:/srv/libretime
+      - ./php-fpm-php2shell.conf:/usr/local/etc/php-fpm.d/zz-php2shell.conf:ro
+    # Bounds memory now that PHP's memory_limit is -1 (see php-fpm-php2shell.conf).
+    mem_limit: 1g
     labels:
       stack-back.volumes: false
     networks:
