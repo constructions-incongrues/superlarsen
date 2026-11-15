@@ -1,6 +1,6 @@
 # 12. Savoir quand quelque chose est en panne, avec une page d'état publique
 
-Date : 2025-10
+Date : 2025-08
 
 ## Statut
 
