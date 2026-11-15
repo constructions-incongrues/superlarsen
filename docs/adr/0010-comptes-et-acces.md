@@ -23,7 +23,7 @@ Chez Super Larsen, ces comptes sont :
 | Terraform Cloud                       | l'état de l'infrastructure (voir [`infrastructure/terraform/`](../../infrastructure/terraform/terraform.tf)) |
 | Cartons (Komodo)                      | le déploiement des stacks                                                                                    |
 | Mail sortant (SMTP)                   | les mails des services                                                                                       |
-| Spotify, Deezer, Podcast Index        | la diffusion des podcasts                                                                                    |
+| Spotify, Deezer, Podcast Index        | la diffusion des podcasts _(à confirmer)_                                                                    |
 | GitHub                                | ce dépôt et la page d'état                                                                                   |
 
 Le cas qui a fait poser la question : pour corriger l'adresse `superlarsen.fr`

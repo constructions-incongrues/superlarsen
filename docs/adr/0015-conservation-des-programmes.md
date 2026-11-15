@@ -8,7 +8,7 @@ Question ouverte.
 
 Les émissions d'une radio associative sont une mémoire locale : des voix, des
 lieux, des débats qu'on ne retrouve nulle part ailleurs. Mais chaque fichier
-garde a un coût de stockage et de sauvegarde, et tout garder sans tri rend
+gardé a un coût de stockage et de sauvegarde, et tout garder sans tri rend
 l'archive inutilisable.
 
 Chez Super Larsen, les programmes vivent à deux endroits :

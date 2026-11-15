@@ -29,10 +29,9 @@ Il y a trois réponses possibles :
    elle doit faire les mises à jour, les sauvegardes et la surveillance, et
    le savoir-faire repose sur une ou deux personnes.
 
-Quand cette décision a été prise, Super Larsen avait déjà un serveur
-(`cartons`, chez Hetzner) qui hébergeait le site WordPress et LibreTime,
-déployés depuis ce dépôt. Un service de plus sur ce serveur ne coûtait
-presque rien de plus.
+Castopod a été installé en même temps que le site WordPress et LibreTime, sur
+le même serveur (`cartons`, chez Hetzner), déployés depuis ce dépôt. Un
+service supplémentaire sur ce serveur ne coûtait presque rien.
 
 ## Décision
 
@@ -44,7 +43,7 @@ Nous hébergeons nos podcasts nous-mêmes avec
 - Les fichiers audio sont dans `/mnt/superlarsen/castopod/media`, sur le
   volume Hetzner géré par Terraform.
 - Le flux RSS de Castopod est **la seule source**. Spotify, Deezer et
-  Podcast Index le lisent, et nous ne téléversons rien à la main sur chaque
+  Podcast Index le lisent _(à confirmer)_, et nous ne téléversons rien à la main sur chaque
   plateforme.
 
 Ce qui nous a fait choisir Castopod plutôt qu'un autre outil auto-hébergé
@@ -55,7 +54,8 @@ un conteneur Docker comme nos autres services.
 ## Ce que nous ne savons pas
 
 - L'endroit exact où partent les sauvegardes : l'adresse du dépôt restic
-  (`RESTIC_REPOSITORY`) est injectée au déploiement par Cartons et n'apparaît
+  (`RESTIC_REPOSITORY`) est injectée au déploiement par l'outil de déploiement (Komodo, sur
+  le serveur `cartons`) et n'apparaît
   pas dans ce dépôt. Le bucket R2 `superlarsen-backups` déclaré dans
   [Terraform](../../infrastructure/terraform/cloudflare.tf) est le candidat
   probable.

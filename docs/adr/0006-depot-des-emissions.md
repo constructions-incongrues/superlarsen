@@ -21,7 +21,7 @@ accès au serveur**.
 
 Les animateurs déposent leurs fichiers par l'interface web de LibreTime
 (`https://libretime.superlarsen.fr`), avec leur propre compte. LibreTime
-analyse chaque fichier (durée, volume, métadonnées) avant de pouvoir le
+analyse chaque fichier (durée, volume, métadonnées) avant qu'on puisse le
 programmer.
 
 Le serveur SFTP (`sftp://sftp.superlarsen.fr:2222`) **ne sert pas à cela** :

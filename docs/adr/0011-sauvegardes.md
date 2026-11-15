@@ -1,6 +1,6 @@
 # 11. Sauvegarder chaque nuit, hors du serveur, avec restic
 
-Date : 2025-10
+Date : 2025-11
 
 Les mots techniques sont expliqués dans le [sommaire](README.md#mots-techniques).
 

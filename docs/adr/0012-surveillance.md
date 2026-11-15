@@ -19,7 +19,9 @@ dépôt
 [`constructions-incongrues/superlarsen-status`](https://github.com/constructions-incongrues/superlarsen-status).
 La page d'état est publique, sur `https://status.superlarsen.fr`.
 
-- Les adresses surveillées : LibreTime, Icecast, Castopod, le wiki et le site.
+- Les adresses surveillées, listées dans
+  [`.upptimerc.yml`](https://github.com/constructions-incongrues/superlarsen-status/blob/HEAD/.upptimerc.yml) :
+  LibreTime, Icecast, Castopod, le wiki et le site.
 - Upptime tourne gratuitement sur GitHub : il ne dépend pas de notre serveur,
   donc il voit la panne même quand `cartons` est tombé.
 - Une panne ouvre un ticket sur GitHub, assigné à une seule personne.

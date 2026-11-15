@@ -13,7 +13,7 @@ concernés sont notamment la SACEM (auteurs et compositeurs) et la SPRE
 ligne, ou les deux, et pour les podcasts.
 
 Pour déclarer, il faut un relevé de ce qui a été diffusé. LibreTime garde
-l'historique de diffusion, déjà utilisé pour afficher les derniers titres
+l'historique de diffusion, probablement utilisé pour afficher les derniers titres
 (voir l'[ADR-0007](0007-titre-en-cours.md)) : c'est peut-être la source des
 relevés _(à vérifier)_.
 
