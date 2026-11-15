@@ -30,7 +30,8 @@ services:
       - ${LIBRETIME_CONFIG_FILEPATH:-./config.yml}:/etc/libretime/config.yml:ro
       - /mnt/superlarsen/libretime/playout:/app
     labels:
-      stack-back.volumes: true=label
+      stack-back.volumes: true
+      stack-back.volumes.include: /mnt/superlarsen/libretime/playout
     environment:
       LIBRETIME_GENERAL_PUBLIC_URL: http://nginx:8080
     networks:
@@ -101,6 +102,10 @@ services:
     volumes:
       - ${LIBRETIME_CONFIG_FILEPATH:-./config.yml}:/etc/libretime/config.yml:ro
       - /mnt/superlarsen/libretime/storage:/srv/libretime
+    labels:
+      # ponytail: the media library is backed up once, through api; legacy and nginx mount the same path
+      stack-back.volumes: true
+      stack-back.volumes.include: /mnt/superlarsen/libretime/storage
     networks:
       - default
     env_file: .env
