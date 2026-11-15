@@ -19,8 +19,8 @@ Chez Super Larsen, les programmes vivent à deux endroits :
 - les podcasts, dans Castopod (`/mnt/superlarsen/castopod/media`, voir
   l'[ADR-0001](0001-hebergement-des-podcasts.md)).
 
-Les podcasts sont sauvegardés, les fichiers de l'antenne probablement pas
-(voir l'[ADR-0011](0011-sauvegardes.md)). Et de toute façon, la
+Les deux sont sauvegardés, les fichiers de l'antenne seulement depuis le
+2026-11-15 (voir l'[ADR-0011](0011-sauvegardes.md)). Et de toute façon, la
 rétention des sauvegardes (3 ans au plus) n'est pas une politique de
 conservation.
 

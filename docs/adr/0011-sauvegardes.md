@@ -27,8 +27,10 @@ Chaque stack qui garde des données a un service `backup`
 [restic](https://restic.net)) : Castopod, LibreTime, WordPress et BookStack.
 
 - **Quoi** : toutes les bases de données, et les fichiers de Castopod, de
-  WordPress et de BookStack. Les fichiers de l'antenne LibreTime n'en font
-  probablement pas partie (voir « Ce que nous ne savons pas »).
+  WordPress, de BookStack et de LibreTime. Pour LibreTime, la médiathèque
+  (`/mnt/superlarsen/libretime/storage`) est sauvegardée une seule fois, par
+  le service `api`, et les fichiers de diffusion par le service `playout`
+  (voir [`stacks/libretime/compose.yaml`](../../stacks/libretime/compose.yaml)).
 - **Quand** : chaque nuit à 1 h (`CRON_SCHEDULE="0 1 * * *"` dans
   [`infrastructure/resources.toml`](../../infrastructure/resources.toml)).
 - **Combien de temps** : 7 sauvegardes quotidiennes, 4 hebdomadaires, 12
@@ -40,12 +42,12 @@ Chaque stack qui garde des données a un service `backup`
 
 ## Ce que nous ne savons pas
 
-- **Si les fichiers de l'antenne sont sauvegardés.** Les émissions et la
-  musique de LibreTime (`/mnt/superlarsen/libretime/storage`) ne semblent
-  pas l'être : aucun des services qui les utilisent ne porte l'étiquette de
-  sauvegarde dans
-  [`stacks/libretime/compose.yaml`](../../stacks/libretime/compose.yaml), et
-  l'un d'eux l'exclut explicitement _(à vérifier)_.
+- **Si la sauvegarde de l'antenne fonctionne.** Jusqu'au 2026-11-15, les
+  émissions et la musique de LibreTime n'étaient pas sauvegardées : aucun
+  service qui les utilise ne portait l'étiquette de sauvegarde. C'est corrigé
+  depuis ([PR #17](https://github.com/constructions-incongrues/superlarsen/pull/17)),
+  mais la première sauvegarde n'a pas encore été vérifiée sur le serveur
+  (`rcb status`, puis le rapport par mail).
 - **Si une restauration marche.** Aucune n'a été testée. Une sauvegarde
   jamais restaurée n'est qu'une hypothèse.
 - L'adresse exacte du dépôt restic : elle est injectée au déploiement et
@@ -59,7 +61,8 @@ Chaque stack qui garde des données a un service `backup`
 
 - Pour ce qui est sauvegardé, une perte de serveur coûte au plus une journée
   de données, si la restauration marche.
-- Un fichier effacé peut se retrouver jusqu'à trois ans en arrière.
+- Un fichier effacé peut se retrouver jusqu'à trois ans en arrière. Pour les
+  fichiers de l'antenne, l'historique ne commence que le 2026-11-15.
 
 ### Ce que nous devons tenir
 
