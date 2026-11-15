@@ -2,6 +2,8 @@
 
 Date : 2025-10
 
+Les mots techniques sont expliqués dans le [sommaire](README.md#mots-techniques).
+
 ## Statut
 
 Proposé. À valider par le collectif Super Larsen avant diffusion à d'autres radios.
@@ -24,7 +26,9 @@ Chaque stack qui garde des données a un service `backup`
 ([stack-back](https://github.com/lawndoc/stack-back) v1.4.5, qui utilise
 [restic](https://restic.net)) : Castopod, LibreTime, WordPress et BookStack.
 
-- **Quoi** : les bases de données et les volumes de chaque stack.
+- **Quoi** : toutes les bases de données, et les fichiers de Castopod, de
+  WordPress et de BookStack. Les fichiers de l'antenne LibreTime n'en font
+  probablement pas partie (voir « Ce que nous ne savons pas »).
 - **Quand** : chaque nuit à 1 h (`CRON_SCHEDULE="0 1 * * *"` dans
   [`infrastructure/resources.toml`](../../infrastructure/resources.toml)).
 - **Combien de temps** : 7 sauvegardes quotidiennes, 4 hebdomadaires, 12
@@ -36,6 +40,12 @@ Chaque stack qui garde des données a un service `backup`
 
 ## Ce que nous ne savons pas
 
+- **Si les fichiers de l'antenne sont sauvegardés.** Les émissions et la
+  musique de LibreTime (`/mnt/superlarsen/libretime/storage`) ne semblent
+  pas l'être : aucun des services qui les utilisent ne porte l'étiquette de
+  sauvegarde dans
+  [`stacks/libretime/compose.yaml`](../../stacks/libretime/compose.yaml), et
+  l'un d'eux l'exclut explicitement _(à vérifier)_.
 - **Si une restauration marche.** Aucune n'a été testée. Une sauvegarde
   jamais restaurée n'est qu'une hypothèse.
 - L'adresse exacte du dépôt restic : elle est injectée au déploiement et
@@ -47,7 +57,8 @@ Chaque stack qui garde des données a un service `backup`
 
 ### Ce que nous gagnons
 
-- Une perte de serveur coûte au plus une journée de données.
+- Pour ce qui est sauvegardé, une perte de serveur coûte au plus une journée
+  de données, si la restauration marche.
 - Un fichier effacé peut se retrouver jusqu'à trois ans en arrière.
 
 ### Ce que nous devons tenir

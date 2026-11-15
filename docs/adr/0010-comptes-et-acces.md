@@ -1,5 +1,7 @@
 # 10. Les comptes : au nom de qui, et qui a les accès ?
 
+Les mots techniques sont expliqués dans le [sommaire](README.md#mots-techniques).
+
 ## Statut
 
 Question ouverte.
@@ -16,7 +18,7 @@ Chez Super Larsen, ces comptes sont :
 | Service                               | À quoi il sert                                                                                               |
 | ------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
 | Registrar du domaine `superlarsen.fr` | le nom de domaine                                                                                            |
-| Cloudflare                            | le DNS, et le stockage R2 des sauvegardes                                                                    |
+| Cloudflare                            | le DNS, et un stockage R2 (destination probable des sauvegardes, _à vérifier_)                               |
 | Hetzner                               | le serveur `cartons` et son volume                                                                           |
 | Terraform Cloud                       | l'état de l'infrastructure (voir [`infrastructure/terraform/`](../../infrastructure/terraform/terraform.tf)) |
 | Cartons (Komodo)                      | le déploiement des stacks                                                                                    |

@@ -26,13 +26,13 @@ page.
 Les fichiers du site sont accessibles par SFTP
 (`sftp://sftp.superlarsen.fr:2222`, voir
 [`stacks/sftp/compose.yaml`](../../stacks/sftp/compose.yaml)), pour que le
-prestataire puisse travailler sans accès au serveur.
+prestataire puisse travailler sans accès au serveur _(à confirmer)_.
 
 ## Ce que nous ne savons pas
 
-- **L'adresse sans `www` ne répond pas** : `superlarsen.fr` n'a pas
-  d'enregistrement DNS. Une redirection vers `www.superlarsen.fr` est à
-  remettre en place.
+- **L'adresse sans `www` ne répond pas** : `superlarsen.fr` ne mène nulle
+  part, et Terraform ne déclare aucun enregistrement pour lui. Une redirection
+  vers `www.superlarsen.fr` est à mettre en place.
 - **La version de WordPress n'est pas fixée** : l'image `wordpress` n'a pas de
   numéro de version, donc chaque redéploiement peut changer de version sans
   qu'on l'ait décidé.

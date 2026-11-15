@@ -2,6 +2,8 @@
 
 Date : 2025-10
 
+Les mots techniques sont expliqués dans le [sommaire](README.md#mots-techniques).
+
 ## Statut
 
 Proposé. À valider par le collectif Super Larsen avant diffusion à d'autres radios.

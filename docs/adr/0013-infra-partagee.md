@@ -45,3 +45,7 @@ dépôt.
 Partager une infrastructure avec une radio voisine divise le travail et les
 coûts. Écrivez avant de commencer qui paie, qui décide et qui part avec quoi :
 c'est plus facile tant que tout va bien.
+
+Si les deux radios n'ont ni les mêmes besoins ni le même rythme (l'une en FM,
+l'autre en ligne, ou des budgets très différents), deux installations séparées
+évitent de devoir décider à deux pour tout.

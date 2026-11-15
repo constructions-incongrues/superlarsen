@@ -2,6 +2,8 @@
 
 Date : 2025-08
 
+Les mots techniques sont expliqués dans le [sommaire](README.md#mots-techniques).
+
 ## Statut
 
 Proposé. À valider par le collectif Super Larsen avant diffusion à d'autres radios.
@@ -49,11 +51,12 @@ que pour un flux musical continu.
 ### Ce que nous gagnons
 
 - Une antenne qui tourne sans personne au studio, sans abonnement.
-- Des comptes pour les animateurs, qui gèrent leurs propres créneaux.
+- Des comptes possibles pour les animateurs _(usage à confirmer, voir
+  l'[ADR-0008](0008-grille-des-programmes.md))_.
 
 ### Ce que nous devons tenir
 
-- C'est notre stack la plus lourde : six services LibreTime, une base et une
+- C'est notre stack la plus lourde : sept services LibreTime, une base et une
   file de messages. Une mise à jour demande de suivre les notes de version.
 - La préparation avant déploiement est un point fragile : si elle échoue,
   l'antenne ne redémarre pas.

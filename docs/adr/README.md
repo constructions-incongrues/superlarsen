@@ -10,6 +10,21 @@ que nous avons choisi et pourquoi, ce que ça nous coûte, et dans quel cas une
 autre radio ferait mieux de répondre autrement. Nos réponses ne sont pas les
 seules bonnes.
 
+## Mots techniques
+
+- **Stack** : l'ensemble des logiciels qui font tourner un service (par
+  exemple le site et sa base de données), décrits dans un fichier
+  `compose.yaml`.
+- **Terraform** : un outil qui décrit dans des fichiers les ressources louées
+  chez nos fournisseurs (serveur, DNS, stockage), pour pouvoir les recréer.
+- **Komodo** : l'outil qui déploie les stacks sur notre serveur `cartons`
+  quand ce dépôt change.
+- **Registrar** : la société chez qui le nom de domaine est acheté.
+- **DNS** : l'annuaire qui relie un nom (`www.superlarsen.fr`) à un serveur.
+- **API** : la porte par laquelle un logiciel donne ses informations à un
+  autre.
+- **Bucket R2** : un espace de stockage de fichiers en ligne, chez Cloudflare.
+
 ## Deux statuts
 
 - **Proposé** : Super Larsen a tranché. La fiche attend la validation du
