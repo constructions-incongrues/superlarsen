@@ -1,2 +1,6 @@
 # Prettier friendly markdownlint config (all formatting rules disabled)
 extends: markdownlint/style/prettier
+
+# Un ADR (ADR-0001) porte un title: en frontmatter et un titre #.
+MD025:
+  front_matter_title: ""
