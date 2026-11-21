@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/compose-spec/compose-spec/6b3a2a93e77c30ded1aa8264307e74d1208a6eae/schema/compose-spec.json
 services:
   postgres:
     image: postgres:15
