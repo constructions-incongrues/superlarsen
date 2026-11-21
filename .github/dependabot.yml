@@ -1,0 +1,29 @@
+# Mises à jour proposées par Dependabot (ADR-0018). Les écosystèmes suivent
+# les fichiers suivis (règle 5). Délai de 7 jours après publication : ADR-0018 en demande au moins 3, zizmor au moins 7.
+version: 2
+updates:
+  - package-ecosystem: docker-compose
+    directories:
+      - /stacks/*
+    schedule:
+      interval: weekly
+    cooldown:
+      default-days: 7
+  - package-ecosystem: terraform
+    directory: /infrastructure/terraform
+    schedule:
+      interval: weekly
+    cooldown:
+      default-days: 7
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+    cooldown:
+      default-days: 7
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    cooldown:
+      default-days: 7
