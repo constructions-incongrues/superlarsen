@@ -14,7 +14,7 @@
   "license": "MIT",
   "scripts": {
     "lint:architecture": "likec4 validate docs/architecture/model",
-    "docs:build": "astro build && node scripts/docs-links.mjs",
+    "docs:build": "astro build && likec4 build docs/architecture/model -o dist/model --base /superlarsen/model/ -t Superlarsen && node scripts/docs-links.mjs",
     "docs:dev": "astro dev"
   }
 }

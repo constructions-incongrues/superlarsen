@@ -4,3 +4,7 @@ extends: markdownlint/style/prettier
 # Un ADR (ADR-0001) porte un title: en frontmatter et un titre #.
 MD025:
   front_matter_title: ""
+
+# Les sections d'arc42 affichent les vues LikeC4 avec ce web component.
+MD033:
+  allowed_elements: [script, likec4-view]

@@ -2,7 +2,11 @@
 title: Contexte et périmètre
 ---
 
-> La vue `context` du modèle LikeC4 (`docs/architecture/model/superlarsen.c4`) montre ce contexte ; les tableaux ci-dessous le détaillent.
+> Ces vues viennent du modèle LikeC4 (`docs/architecture/model/superlarsen.c4`). Le modèle complet se parcourt sur [/superlarsen/model/](/superlarsen/model/) ; les tableaux ci-dessous détaillent les vues.
+
+<script type="module" src="/superlarsen/model/likec4-views.js"></script>
+
+<likec4-view view-id="context"></likec4-view>
 
 ## Contexte métier
 
