@@ -2,7 +2,15 @@
 title: Vue en briques
 ---
 
-> Les vues `stacks`, `wordpressStack`, `bookstackStack`, `castopodStack` et `libretimeStack` du modèle LikeC4 (`docs/architecture/model/superlarsen.c4`) montrent ces briques ; les tableaux ci-dessous les détaillent.
+> Ces vues viennent du modèle LikeC4 (`docs/architecture/model/superlarsen.c4`). Le modèle complet se parcourt sur [/superlarsen/model/](/superlarsen/model/) ; les tableaux ci-dessous détaillent les vues.
+
+<script type="module" src="/superlarsen/model/likec4-views.js"></script>
+
+<likec4-view view-id="stacks"></likec4-view>
+<likec4-view view-id="wordpressStack"></likec4-view>
+<likec4-view view-id="bookstackStack"></likec4-view>
+<likec4-view view-id="castopodStack"></likec4-view>
+<likec4-view view-id="libretimeStack"></likec4-view>
 
 ## Niveau 1 : le dépôt
 
