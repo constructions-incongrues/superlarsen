@@ -70,11 +70,15 @@ resource "cloudflare_record" "cnames" {
   comment = "Géré par Terraform"
 }
 
-# Caddy présente déjà un certificat valide pour www : Cloudflare le vérifie.
-resource "cloudflare_zone_settings_override" "main" {
-  zone_id = data.cloudflare_zone.main.id
-  settings {
-    ssl = "strict"
+# Le chiffrement de la zone (Full strict) se règle hors Terraform, avec la CLI Cloudflare :
+#   cf zones settings edit ssl --zone superlarsen.fr --body '{"value":"strict"}'
+# cloudflare_zone_settings_override (provider v4) relit tous les réglages de la zone et
+# échoue sur prefetch_preload, désormais en lecture seule (run TFC du 2026-11-21).
+# Le bloc removed oublie la ressource à moitié créée sans rien restaurer sur la zone.
+removed {
+  from = cloudflare_zone_settings_override.main
+  lifecycle {
+    destroy = false
   }
 }
 
