@@ -2,7 +2,7 @@
 title: Vue de déploiement
 ---
 
-> La vue de déploiement sera générée depuis le modèle LikeC4 (issue #23). En attendant, le déploiement est décrit en prose.
+> La vue `production` du modèle LikeC4 (`docs/architecture/model/superlarsen.c4`) montre ce déploiement ; le tableau ci-dessous le détaille.
 
 | Nœud                                        | Ce qui y tourne                                                                                                                 |
 | ------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |

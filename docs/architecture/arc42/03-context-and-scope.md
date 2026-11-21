@@ -2,7 +2,7 @@
 title: Contexte et périmètre
 ---
 
-> La vue de contexte sera générée depuis le modèle LikeC4 (`docs/architecture/model/`, issue #23). En attendant, ce contexte est décrit en prose.
+> La vue `context` du modèle LikeC4 (`docs/architecture/model/superlarsen.c4`) montre ce contexte ; les tableaux ci-dessous le détaillent.
 
 ## Contexte métier
 
