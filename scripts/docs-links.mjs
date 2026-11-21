@@ -22,3 +22,17 @@ console.assert(
   fix('<a href="../x/ADR-0001-Foo.md#bar">') ===
     '<a href="../../x/adr-0001-foo/#bar">',
 );
+
+// La barre latérale doit lister les pages : Starlight cherche les dossiers
+// `autogenerate` sous le chemin du fichier (docs/…), et un dossier mal nommé
+// donne une navigation vide sans erreur de build.
+const page = readFileSync(
+  "dist/architecture/arc42/01-introduction-and-goals/index.html",
+  "utf8",
+);
+if (!page.includes('href="/superlarsen/adr/engineering/')) {
+  console.error(
+    "docs: barre latérale vide, vérifier les `autogenerate.directory` d’astro.config.mjs",
+  );
+  process.exit(1);
+}
