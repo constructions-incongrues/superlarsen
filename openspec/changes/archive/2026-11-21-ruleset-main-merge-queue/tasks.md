@@ -22,5 +22,5 @@
 
 ## 4. Clôture
 
-- [ ] 4.1 Vérifier dans Cartons que la synchronisation tourne toujours depuis `main` après `managed = false`
-- [ ] 4.2 Archiver le change (`openspec archive ruleset-main-merge-queue`) dans la PR qui coche la dernière tâche, et fermer #36
+- [x] 4.1 Vérifier dans Cartons que la synchronisation tourne toujours depuis `main` après `managed = false`. Le sync est vert après deux corrections : Managed passé à off dans l'interface (le sync ne peut pas modifier sa propre config pendant qu'il tourne), et le builder « gabelle », qui n'existait pas, retiré de `resources.toml` (#51)
+- [x] 4.2 Archiver le change (`openspec archive ruleset-main-merge-queue`) dans la PR qui coche la dernière tâche, et fermer #36
