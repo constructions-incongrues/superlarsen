@@ -2,8 +2,8 @@
 // sur GitHub. Sur le site, chaque page est un dossier en minuscules, un niveau
 // plus bas que son fichier : `../x/ADR-0001-foo.md#bar` → `../../x/adr-0001-foo/#bar`.
 // ponytail: liens relatifs dans href="…" seulement ; un lien absolu vers un .md resterait cassé.
-import { readdirSync, readFileSync, writeFileSync } from "node:fs";
-import { join } from "node:path";
+import { existsSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
+import { dirname, join } from "node:path";
 
 const fix = (html) =>
   html.replace(
@@ -33,6 +33,28 @@ const page = readFileSync(
 if (!page.includes('href="/superlarsen/adr/engineering/')) {
   console.error(
     "docs: barre latérale vide, vérifier les `autogenerate.directory` d’astro.config.mjs",
+  );
+  process.exit(1);
+}
+
+// Chaque lien interne doit mener à un fichier ou à une page du site.
+const broken = [];
+for (const entry of readdirSync("dist", { recursive: true })) {
+  if (!entry.endsWith("index.html") || entry.startsWith("model/")) continue;
+  const html = readFileSync(join("dist", entry), "utf8");
+  const base = new URL(`https://site/superlarsen/${dirname(entry)}/`);
+  for (const [, href] of html.matchAll(/href="([^"#?]+)/g)) {
+    if (/^[a-z]+:/i.test(href)) continue;
+    const path = new URL(href, base).pathname;
+    if (!path.startsWith("/superlarsen/")) continue;
+    const target = join("dist", path.slice("/superlarsen/".length));
+    if (!existsSync(target) && !existsSync(join(target, "index.html")))
+      broken.push(`${entry} → ${href}`);
+  }
+}
+if (broken.length) {
+  console.error(
+    `docs: ${broken.length} lien(s) interne(s) cassé(s)\n${broken.join("\n")}`,
   );
   process.exit(1);
 }
