@@ -22,8 +22,13 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
-      - uses: zizmorcore/zizmor-action@45d7276c9ca790aabd705e31ca99c6185c3e76dd # v0.8.1
+      - uses: jdx/mise-action@90f833d396d0cc3674b631d2d225e306476c303a # v5.2.10
         with:
-          version: 1.32.0
-          advanced-security: false
-          annotations: true
+          version: 2026.11.8
+          install_args: zizmor
+        env:
+          MISE_LOCKED: 1
+      # zizmor vient de mise.lock (ADR-0025) ; ses audits en ligne lisent GH_TOKEN.
+      - run: zizmor --format=github .
+        env:
+          GH_TOKEN: ${{ github.token }}

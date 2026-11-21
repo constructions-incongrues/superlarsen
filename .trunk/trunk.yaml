@@ -17,6 +17,10 @@ runtimes:
 # This is the section where you manage your linters. (https://docs.trunk.io/check/configuration)
 lint:
   ignore:
+    # Verrous générés par mise (ADR-0025) : ni formatés ni analysés.
+    - linters: [ALL]
+      paths:
+        - .mise/**
     # Modèles OpenSpec copiés de l'amont (ADR-0016) : leur forme est celle d'OpenSpec.
     - linters: [markdownlint]
       paths:
