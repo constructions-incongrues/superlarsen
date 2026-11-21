@@ -4,11 +4,12 @@ name: lint
 
 on:
   pull_request:
+  merge_group:
 
 permissions: {}
 
 concurrency:
-  group: lint-${{ github.head_ref }}
+  group: lint-${{ github.head_ref || github.ref }}
   cancel-in-progress: true
 
 jobs:
@@ -23,3 +24,10 @@ jobs:
         with:
           persist-credentials: false
       - uses: trunk-io/trunk-action@e1234e67a86010d61ddac8d8ebf4b783e2ffd2fa # v2.0.0
+        # Sur merge_group, trunk-action choisit le mode « none » et n'analyse rien :
+        # on le force en mode push, sur le diff entre main et le commit du groupe.
+        with:
+          check-mode: ${{ github.event_name == 'merge_group' && 'push' || '' }}
+        env:
+          GITHUB_EVENT_BEFORE: ${{ github.event.merge_group.base_sha }}
+          GITHUB_EVENT_AFTER: ${{ github.event.merge_group.head_sha }}

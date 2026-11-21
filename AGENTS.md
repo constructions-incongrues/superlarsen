@@ -82,8 +82,14 @@ Chaque stack se connecte à deux réseaux Docker externes :
 
 Pour ajouter un service exposé sur le web, ajouter le réseau `caddy` et les labels Caddy correspondants.
 
-<!-- ontrack:begin -->
+## Atteindre main
 
+- Un changement atteint `main` par une pull request, puis par la merge queue ([ADR-0001](docs/adr/local/ADR-0001-merge-queue.md)). Personne ne pousse directement sur `main` et personne ne contourne la file, le mainteneur compris.
+- C'est le mainteneur qui met une PR dans la file. L'agent ne merge pas, n'approuve pas et ne met rien en file (ADR-0022) : `.claude/settings.json` lui refuse `gh pr merge` et `gh pr review`.
+- Un workflow dont le check est requis se déclenche sur `pull_request` et sur `merge_group`.
+- Cartons applique le dépôt et n'y écrit jamais ([ADR-0002](docs/adr/local/ADR-0002-cartons-config-from-repository.md)). Une stack se modifie par une PR, jamais dans l'interface de Cartons : la synchronisation suivante écraserait la modification.
+
+<!-- ontrack:begin -->
 ## Project instructions (ontrack)
 
 When asked to review, rule on or supersede an ADR, run `npx ontrack review [adr]` and follow its output.
@@ -119,7 +125,8 @@ validation:
 
 ```yaml
 commits:
-  scopes: [bookstack, castopod, libretime, sftp, wordpress, cloudflare, hetzner]
+  scopes:
+    [bookstack, castopod, libretime, sftp, wordpress, cloudflare, hetzner]
   tool: none
 ```
 

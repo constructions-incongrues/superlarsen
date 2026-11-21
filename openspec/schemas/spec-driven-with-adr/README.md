@@ -10,7 +10,7 @@ Copié depuis [intent-driven-dev/openspec-schemas](https://github.com/intent-dri
 
 Les trois écarts qu'ADR-0016 demande, dans les instructions `design` et `adr` et dans `templates/adr.md` :
 
-1. les ADR se lisent dans `docs/adr/` et ses sous-répertoires, et s'écrivent dans `docs/adr/`, pas dans un `adr/` à la racine ;
+1. les ADR se lisent dans `docs/adr/` et ses sous-répertoires, et ceux du dépôt s'écrivent dans `docs/adr/local/`, où `ontrack apply` les range, pas dans un `adr/` à la racine ;
 2. ils suivent le format d'ADR-0001 : frontmatter avec `supersedes:` et sections Nygard, au lieu de MADR-short avec un champ `Supersedes:` dans le corps ;
 3. ils se nomment `ADR-NNNN-slug.md`, au lieu de `NNNN-kebab-title.md`.
 
