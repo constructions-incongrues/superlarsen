@@ -10,7 +10,8 @@ sequenceDiagram
     participant G as GitHub
     participant C as Cartons
     participant S as Serveur cartons
-    M->>G: merge d'une PR sur main
+    M->>G: met une PR verte dans la merge queue
+    G->>G: trunk check et zizmor sur main + PR, puis squash
     G->>C: webhook de push
     C->>C: synchronise resources.toml et stacks/
     C->>S: docker compose up de chaque stack modifiée
