@@ -15,9 +15,9 @@
 
 ## 3. Forge (le mainteneur, après le merge de la PR)
 
-- [ ] 3.1 Créer le ruleset depuis `.github/rulesets/main.json` avec `gh api -X POST repos/{owner}/{repo}/rulesets --input .github/rulesets/main.json`
-- [ ] 3.2 Mettre en file une PR de test et vérifier que `trunk check` et `zizmor` tournent sur `merge_group` et que la PR est mergée en squash
-- [ ] 3.3 Supprimer la protection de branche classique de `main` (`gh api -X DELETE repos/{owner}/{repo}/branches/main/protection`)
+- [x] 3.1 Créer le ruleset depuis `.github/rulesets/main.json` avec `gh api -X POST repos/{owner}/{repo}/rulesets --input .github/rulesets/main.json`
+- [x] 3.2 Mettre en file une PR de test et vérifier que `trunk check` et `zizmor` tournent sur `merge_group` et que la PR est mergée en squash
+- [x] 3.3 Supprimer la protection de branche classique de `main` (`gh api -X DELETE repos/{owner}/{repo}/branches/main/protection`). Fait avant 3.2 : tant qu'elle existait, l'ancienne protection exigeait 1 approbation, et aucune PR ne pouvait entrer dans la file
 - [ ] 3.4 Vérifier qu'un push direct sur `main` et qu'un `gh pr merge --admin` sont refusés
 
 ## 4. Clôture
