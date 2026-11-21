@@ -200,7 +200,6 @@ name = "superlarsen-main"
 tags = ["superlarsen"]
 [repo.config]
 server = "cartons"
-builder = "gabelle"
 git_account = "trivoallan"
 repo = "constructions-incongrues/superlarsen"
 
