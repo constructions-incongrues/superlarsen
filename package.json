@@ -8,6 +8,7 @@
   "allowScripts": {
     "@jackchuka/mdschema@0.15.1": true
   },
+  "license": "MIT",
   "scripts": {
     "lint:architecture": "likec4 validate docs/architecture/model"
   }
