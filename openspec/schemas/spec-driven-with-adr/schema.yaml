@@ -1,6 +1,6 @@
 name: spec-driven-with-adr
 version: 1
-description: Default OpenSpec workflow - proposal → specs → design → adr → tasks (ADRs persist in docs/adr/, ADR-0001 format)
+description: Default OpenSpec workflow - proposal → specs → design → adr → tasks (ADRs persist in docs/adr/local/, ADR-0001 format)
 artifacts:
   - id: proposal
     generates: proposal.md
@@ -39,7 +39,7 @@ artifacts:
 
 
       Durable architectural decisions worth carrying across changes are
-      distilled into ADR files in docs/adr/ by a later step (after design).
+      distilled into ADR files in docs/adr/local/ by a later step (after design).
 
 
       This is the foundation - specs, design, adr, and tasks all build on this.
@@ -217,11 +217,12 @@ artifacts:
       do not complete ADR review for a new change.
 
 
-      Durable Architecture Decision Records live in docs/adr/ and persist
-      across changes, never in a top-level adr/ folder or inside openspec/.
+      The repository's own Architecture Decision Records live in
+      docs/adr/local/ (where `ontrack apply` keeps them) and persist across
+      changes, never in a top-level adr/ folder or inside openspec/.
       The governance ADRs live in docs/adr/engineering/ and are never written
       by this step. If this change introduces a new durable architectural
-      decision, create a repository-level ADR at docs/adr/ADR-NNNN-slug.md and
+      decision, create a repository-level ADR at docs/adr/local/ADR-NNNN-slug.md and
       reference it from
       openspec/changes/<change>/adr.md. Do not duplicate the full ADR content
       in the manifest.
@@ -242,8 +243,8 @@ artifacts:
       1. Read every existing ADR in docs/adr/ and its subdirectories. Build
       the supersession graph from each ADR's `supersedes:` frontmatter key.
       Note the highest sequence number in use among the repository's own ADRs
-      in docs/adr/ (the governance ADRs in subdirectories have their own
-      numbering). Record the currently in-force ADRs reviewed in the change-local
+      in docs/adr/local/ (the governance ADRs in docs/adr/engineering/ have
+      their own numbering). Record the currently in-force ADRs reviewed in the change-local
       adr.md manifest.
 
 
@@ -260,7 +261,7 @@ artifacts:
 
 
       3. For each qualifying decision, create a NEW file at
-      docs/adr/ADR-NNNN-slug.md, where NNNN is a 4-digit sequence one greater
+      docs/adr/local/ADR-NNNN-slug.md, where NNNN is a 4-digit sequence one greater
       than the highest of the repository's own ADRs, with no gap. Use the
       format of docs/adr/engineering/ADR-0001-record-architecture-decisions.md:
       its frontmatter (adr, slug, title, status, date, authors, supersedes)
