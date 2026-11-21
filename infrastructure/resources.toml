@@ -49,9 +49,7 @@ name = "superlarsen-castopod"
 tags = ["superlarsen"]
 [stack.config]
 server = "cartons"
-links = [
-  "https://castopod.superlarsen.fr"
-]
+links = ["https://castopod.superlarsen.fr"]
 linked_repo = "superlarsen-main"
 run_directory = "stacks/castopod"
 environment = """
@@ -95,9 +93,7 @@ name = "superlarsen-libretime"
 tags = ["icecast", "superlarsen"]
 [stack.config]
 server = "cartons"
-links = [
-  "https://libretime.superlarsen.fr"
-]
+links = ["https://libretime.superlarsen.fr"]
 linked_repo = "superlarsen-main"
 webhook_force_deploy = true
 run_directory = "stacks/libretime"
@@ -204,7 +200,6 @@ name = "superlarsen-main"
 tags = ["superlarsen"]
 [repo.config]
 server = "cartons"
-builder = "gabelle"
 git_account = "trivoallan"
 repo = "constructions-incongrues/superlarsen"
 
@@ -215,9 +210,6 @@ name = "superlarsen"
 tags = ["superlarsen"]
 [resource_sync.config]
 linked_repo = "superlarsen-main"
-resource_path = [
-  "infrastructure/resources.toml",
-  "stacks"
-]
-managed = true
+resource_path = ["infrastructure/resources.toml", "stacks"]
+managed = false                                             # ADR-0002 : Cartons applique le dépôt et n'y écrit jamais
 match_tags = ["superlarsen"]

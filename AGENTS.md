@@ -1,3 +1,94 @@
+# AGENTS.md
+
+Instructions pour les agents qui travaillent dans ce dépôt.
+
+## Ce qu'est ce dépôt
+
+L'infrastructure as code et la gestion de configuration de la plateforme d'hébergement Superlarsen. Il définit des stacks Docker Compose et une infrastructure Terraform. Il ne contient pas de code applicatif à construire ni à tester.
+
+## Modèle de déploiement
+
+Les déploiements sont déclenchés automatiquement par **Cartons** (<https://cartons.pastis-hosting.net/stacks>) à chaque push sur `main`. Cartons lit `infrastructure/resources.toml` pour savoir comment déployer chaque stack.
+
+- Toutes les stacks tournent sur un seul serveur Hetzner Cloud, nommé `cartons`.
+- Toutes les données persistantes sont sous `/mnt/superlarsen/<nom-de-stack>/` sur ce serveur.
+- DNS : tous les domaines sont des CNAME vers `cartons.pastis-hosting.net`, servis par Caddy (reverse proxy sur le serveur, configuré automatiquement par les labels Docker).
+- Terraform gère le volume Hetzner, le DNS Cloudflare et les buckets R2. L'état est dans Terraform Cloud (workspace `constructions-incongrues/superlarsen`).
+
+## Lint
+
+Trunk lance les linters. Linters actifs : `checkov` (sécurité IaC), `markdownlint`, `prettier`, `taplo` (TOML), `tflint`, `trufflehog` (secrets), `yamllint`.
+
+```bash
+trunk check        # lint des fichiers modifiés
+trunk check --all  # lint de tout le dépôt
+trunk fmt          # formatage automatique
+```
+
+Trunk installe les hooks `trunk-fmt-pre-commit` et `trunk-check-pre-push`.
+
+## Terraform
+
+```bash
+cd infrastructure/terraform
+terraform init
+terraform plan
+terraform apply
+```
+
+## Propagation des changements
+
+Cartons récupère les changements par un bloc `resource_sync` de `resources.toml`, qui surveille `infrastructure/resources.toml` et `stacks/`. Un push sur `main` déclenche une synchronisation, sans étape manuelle dans l'interface de Cartons.
+
+## Fichiers clés
+
+- `infrastructure/resources.toml` : la source unique de la configuration de toutes les stacks consommées par Cartons. Les secrets y sont des gabarits `[[NOM_DE_VARIABLE]]`, injectés par Cartons au déploiement.
+- `stacks/<nom>/compose.yaml` : la définition Docker Compose de chaque stack.
+
+## Stacks
+
+| Stack     | URL                                                                   | Notes                                                |
+| --------- | --------------------------------------------------------------------- | ---------------------------------------------------- |
+| bookstack | <https://wiki.superlarsen.fr>                                         | Wiki, MySQL 9.2                                      |
+| castopod  | <https://castopod.superlarsen.fr>                                     | Hébergement de podcasts, MariaDB + Redis             |
+| libretime | <https://libretime.superlarsen.fr> / <https://icecast.superlarsen.fr> | Programmation radio, PostgreSQL + RabbitMQ + Icecast |
+| wordpress | <https://www.superlarsen.fr>                                          | Site principal, MySQL 8.0                            |
+| sftp      | <sftp://sftp.superlarsen.fr:2222>                                     | Accès aux fichiers du volume WordPress               |
+
+## LibreTime : traitement particulier
+
+LibreTime demande une étape avant déploiement (définie dans `resources.toml`) qui :
+
+1. lance `envsubst` pour produire `config.yml` à partir de `config.template.yml` et du `.env` injecté ;
+2. lance les migrations de base de données avec `docker compose run --rm api libretime-api migrate`.
+
+Pour modifier `stacks/libretime/`, `config.template.yml` reste la source de vérité. Ne jamais modifier le `config.yml` généré.
+
+## Sauvegardes
+
+Chaque stack (sauf sftp) inclut un service `stack-back` (`ghcr.io/lawndoc/stack-back:v1.4.5`) qui lance chaque jour à 01:00 UTC une sauvegarde Restic vers Cloudflare R2. Rétention : 7 quotidiennes, 4 hebdomadaires, 12 mensuelles, 3 annuelles.
+
+Les services s'inscrivent aux sauvegardes par des labels Docker :
+
+- `stack-back.volumes: true` : sauvegarde les volumes nommés ou montés du service ;
+- `stack-back.mysql: true` / `stack-back.postgres: true` : fait un dump de la base avant la sauvegarde.
+
+## Réseau
+
+Chaque stack se connecte à deux réseaux Docker externes :
+
+- `caddy` : le routage par le reverse proxy (les services s'exposent par des labels Docker) ;
+- `smtp` : l'envoi d'e-mails par le SMTP de Gmail.
+
+Pour ajouter un service exposé sur le web, ajouter le réseau `caddy` et les labels Caddy correspondants.
+
+## Atteindre main
+
+- Un changement atteint `main` par une pull request, puis par la merge queue ([ADR-0001](docs/adr/local/ADR-0001-merge-queue.md)). Personne ne pousse directement sur `main` et personne ne contourne la file, le mainteneur compris.
+- C'est le mainteneur qui met une PR dans la file. L'agent ne merge pas, n'approuve pas et ne met rien en file (ADR-0022) : `.claude/settings.json` lui refuse `gh pr merge` et `gh pr review`.
+- Un workflow dont le check est requis se déclenche sur `pull_request` et sur `merge_group`.
+- Cartons applique le dépôt et n'y écrit jamais ([ADR-0002](docs/adr/local/ADR-0002-cartons-config-from-repository.md)). Une stack se modifie par une PR, jamais dans l'interface de Cartons : la synchronisation suivante écraserait la modification.
+
 <!-- ontrack:begin -->
 
 ## Project instructions (ontrack)

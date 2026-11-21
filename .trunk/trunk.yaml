@@ -17,13 +17,14 @@ runtimes:
 # This is the section where you manage your linters. (https://docs.trunk.io/check/configuration)
 lint:
   ignore:
-    - linters: [markdownlint]
-      paths:
-        - CLAUDE.md
     # Modèles OpenSpec copiés de l'amont (ADR-0016) : leur forme est celle d'OpenSpec.
     - linters: [markdownlint]
       paths:
         - openspec/schemas/*/templates/**
+    # Les artefacts OpenSpec ne commencent pas par un titre.
+    - linters: [markdownlint]
+      paths:
+        - openspec/changes/**
   enabled:
     - checkov@3.2.513
     - git-diff-check
@@ -36,6 +37,7 @@ lint:
 actions:
   enabled:
     - trunk-announce
+    - trunk-check-pre-commit # trufflehog et les linters avant chaque commit (ADR-0015)
     - trunk-check-pre-push
     - trunk-fmt-pre-commit
     - trunk-upgrade-available
