@@ -1,7 +1,10 @@
 {
   "devDependencies": {
+    "@astrojs/starlight": "0.43.1",
     "@fission-ai/openspec": "2.1.0",
     "@trivoallan/ontrack": "^0.6.0",
+    "astro": "7.4.13",
+    "astro-mermaid": "2.2.0",
     "engineering": "npm:@trivoallan/ontrack-engineering@^0.6.0",
     "likec4": "1.61.0"
   },
@@ -9,6 +12,8 @@
     "@jackchuka/mdschema@0.15.1": true
   },
   "scripts": {
-    "lint:architecture": "likec4 validate docs/architecture/model"
+    "lint:architecture": "likec4 validate docs/architecture/model",
+    "docs:build": "astro build && node scripts/docs-links.mjs",
+    "docs:dev": "astro dev"
   }
 }
