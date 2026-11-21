@@ -26,7 +26,12 @@ services:
       stack-back.volumes: true
 
   db:
-    image: mysql:8.0
+    # 8.4 convertit le dossier de données : 8.0 ne peut plus le relire. Revenir
+    # en arrière, c'est restaurer une sauvegarde.
+    image: mysql:8.4.13@sha256:a81d043930e51745522bd5c430961cf8286f0a23f0a9a2a6e0108f7ea71b0902
+    # 8.4 désactive mysql_native_password par défaut ; on le garde disponible au
+    # cas où l'utilisateur WordPress en dépend encore.
+    command: --mysql-native-password=ON # checkov:skip=CKV_SECRET_6:nom d'option MySQL, pas un mot de passe
     restart: always
     environment:
       MYSQL_DATABASE: ${MYSQL_DATABASE:-exampledb}
