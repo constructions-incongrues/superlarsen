@@ -47,6 +47,9 @@ model {
   caddy = external 'Caddy' {
     description 'Reverse proxy du serveur, configuré par labels Docker'
   }
+  hetznercloud = external 'Hetzner Cloud' {
+    description 'Le serveur cartons et le volume superlarsen'
+  }
   cloudflare = external 'Cloudflare' {
     description 'DNS de superlarsen.fr, proxy et WAF pour www'
   }
@@ -68,7 +71,7 @@ model {
       wpApp = service 'WordPress' {
         description "Avec le mu-plugin d'anonymat des comptes"
       }
-      wpDb = database 'MySQL 8.0'
+      wpDb = database 'MySQL 8.4'
       wpBackup = service 'stack-back'
       wpApp -> wpDb 'lit et écrit'
       wpBackup -> wpDb 'dump'
@@ -141,6 +144,7 @@ model {
   cartons -> superlarsen 'déploie les stacks'
   caddy -> superlarsen 'route les domaines'
   terraformcloud -> cloudflare 'DNS, WAF et buckets'
+  terraformcloud -> hetznercloud 'volume'
   superlarsen -> r2 'sauvegardes Restic, chaque jour à 01:00 UTC'
   superlarsen -> gmail 'envoie les e-mails'
 }
@@ -150,7 +154,7 @@ views {
     title 'Contexte'
     description "Section 3 d'arc42"
     include superlarsen, visitor, member, maintainer
-    include github, cartons, caddy, cloudflare, r2, terraformcloud, gmail
+    include github, cartons, caddy, hetznercloud, cloudflare, r2, terraformcloud, gmail
   }
 
   view stacks of superlarsen {

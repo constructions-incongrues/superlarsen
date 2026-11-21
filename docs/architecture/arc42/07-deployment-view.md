@@ -14,8 +14,22 @@ title: Vue de déploiement
 | Volume Hetzner `superlarsen` (200 Go, ext4) | les données persistantes, sous `/mnt/superlarsen/<stack>/`                                                                      |
 | Cloudflare                                  | la zone `superlarsen.fr` ; chaque sous-domaine est un CNAME vers `cartons.pastis-hosting.net`, sauf `status`, vers GitHub Pages |
 | Cloudflare R2 (WEUR)                        | les buckets `superlarsen` et `superlarsen-backups`                                                                              |
+| Terraform Cloud                             | l'état et les exécutions de Terraform, pour `infrastructure/terraform/`                                                         |
 
 Un seul environnement, la production. `www` est le seul enregistrement proxifié par Cloudflare ; l'origine WordPress n'accepte `www` que depuis les plages Cloudflare. Les autres sous-domaines arrivent directement sur Caddy.
+
+Tout n'est pas sur le volume : la base de BookStack est dans un volume Docker, sur le disque du serveur, comme la file RabbitMQ et le cache de `stack-back`.
+
+## Chiffrement en transit
+
+| Entrée                                     | Où TLS se termine                                                                             |
+| ------------------------------------------ | --------------------------------------------------------------------------------------------- |
+| `www`                                      | chez Cloudflare, puis une seconde fois sur Caddy : la zone est en mode _Full (strict)_        |
+| `wiki`, `castopod`, `libretime`, `icecast` | sur Caddy, qui obtient les certificats                                                        |
+| `sftp`, port 2222                          | pas de TLS : SSH chiffre la session, sans passer par Caddy                                    |
+| ports 8001 et 8002                         | pas de TLS : les entrées de direct de LibreTime sont publiées en clair, sans passer par Caddy |
+
+Derrière Caddy, le trafic vers les conteneurs circule en clair sur le réseau Docker `caddy`, à l'intérieur du serveur.
 
 ## Stacks déployées
 
