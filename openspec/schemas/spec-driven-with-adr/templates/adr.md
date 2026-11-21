@@ -9,7 +9,7 @@
 ## In-Force ADR Context Reviewed
 
 <!-- List currently in-force repository-level ADRs reviewed before completing this change.
-Use `- docs/adr/ADR-NNNN-slug.md - short relevance note`.
+Use `- docs/adr/local/ADR-NNNN-slug.md - short relevance note`.
 If none exist, write `- None: no existing repository-level ADRs were present.` -->
 
 -
@@ -17,7 +17,7 @@ If none exist, write `- None: no existing repository-level ADRs were present.` -
 ## Repository-Level ADRs Created
 
 <!-- Reference every durable ADR created for this change.
-Use `- docs/adr/ADR-NNNN-slug.md - decision summary`.
+Use `- docs/adr/local/ADR-NNNN-slug.md - decision summary`.
 Do not duplicate the ADR's Context, Decision, or Consequences sections here.
 If no durable ADR was needed, write:
 `- None: no major durable architectural decisions were introduced by this change.` -->

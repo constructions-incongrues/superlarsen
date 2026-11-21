@@ -4,7 +4,7 @@ title: Concepts transversaux
 
 ## Secrets
 
-Aucune valeur dans le dépôt. `resources.toml` porte des références `[[NOM]]`, remplies par Cartons au déploiement ; Terraform reçoit ses tokens de Terraform Cloud. Trufflehog, lancé par Trunk, et GitGuardian, sur les PR, cherchent les fuites ([ADR-0015](../../adr/engineering/ADR-0015-secrets.md)).
+Aucune valeur dans le dépôt. `resources.toml` porte des références `[[NOM]]`, remplies par Cartons au déploiement ; Terraform reçoit ses tokens de Terraform Cloud. Trufflehog, lancé par Trunk à chaque commit, et GitGuardian, sur les PR, cherchent les fuites ([ADR-0015](../../adr/engineering/ADR-0015-secrets.md)).
 
 ## Exposition web
 
@@ -20,4 +20,4 @@ Le service `stack-back` (`ghcr.io/lawndoc/stack-back:v1.4.5`) de chaque stack, s
 
 ## Qualité des changements
 
-Trunk lance `checkov`, `tflint`, `yamllint`, `taplo`, `markdownlint`, `prettier` et `trufflehog` avant chaque push.
+Trunk lance `checkov`, `tflint`, `yamllint`, `taplo`, `markdownlint`, `prettier` et `trufflehog` à chaque commit et à chaque push, puis en CI sur chaque PR (`trunk check`), avec zizmor qui audite les workflows. Un changement atteint `main` par une PR puis par la merge queue, qui relance ces deux checks sur le résultat, sans contournement ([ADR-0001](../../adr/local/ADR-0001-merge-queue.md)).
