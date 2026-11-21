@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/compose-spec/compose-spec/6b3a2a93e77c30ded1aa8264307e74d1208a6eae/schema/compose-spec.json
 services:
   app:
-    image: castopod/castopod:1.15.6
+    image: castopod/castopod:1.15.7@sha256:9479cd65c4c933bb151838c8da784d284742d56b2fa74ce2cf0be4168f1dc6f0
     volumes:
       - /mnt/superlarsen/castopod/media:/app/public/media
     networks:
