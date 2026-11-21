@@ -43,12 +43,12 @@ Ouvrez la PR, puis, une fois relue :
 gh pr merge <numéro> --squash
 ```
 
-La PR entre dans la file d'attente quand les checks requis sont verts, puis elle est mergée en squash. Voir [les checks](../reference/checks.md).
+La PR entre dans la file d'attente quand les checks requis sont verts, puis elle est mergée en squash. Voir [la qualité des changements](../architecture/arc42/08-cross-cutting-concepts.md).
 
 ## 4. Vérifier le déploiement
 
 - Dans Cartons, la stack s'est redéployée sans erreur.
-- Le service répond : voir [les stacks](../reference/stacks.md).
+- Le service répond : voir [les stacks déployées](../architecture/arc42/07-deployment-view.md).
 
 Une modification faite dans l'interface de Cartons est écrasée à la synchronisation suivante : passez toujours par le dépôt.
 
