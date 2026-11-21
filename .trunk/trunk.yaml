@@ -24,6 +24,10 @@ lint:
     - linters: [markdownlint]
       paths:
         - openspec/schemas/*/templates/**
+    # Les artefacts OpenSpec ne commencent pas par un titre.
+    - linters: [markdownlint]
+      paths:
+        - openspec/changes/**
   enabled:
     - checkov@3.2.513
     - git-diff-check
