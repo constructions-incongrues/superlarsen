@@ -1,0 +1,2 @@
+# Applique ADR-0016 (changes.schema) ; ne le décide pas. Les deux doivent rester égaux.
+schema: spec-driven-with-adr

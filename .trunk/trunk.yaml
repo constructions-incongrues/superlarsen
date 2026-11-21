@@ -20,6 +20,10 @@ lint:
     - linters: [markdownlint]
       paths:
         - CLAUDE.md
+    # Modèles OpenSpec copiés de l'amont (ADR-0016) : leur forme est celle d'OpenSpec.
+    - linters: [markdownlint]
+      paths:
+        - openspec/schemas/*/templates/**
   enabled:
     - checkov@3.2.513
     - git-diff-check
