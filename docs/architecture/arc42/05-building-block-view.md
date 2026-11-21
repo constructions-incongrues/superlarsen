@@ -2,7 +2,7 @@
 title: Vue en briques
 ---
 
-> La vue en briques sera générée depuis le modèle LikeC4 (issue #23). En attendant, les briques sont décrites en prose.
+> Les vues `stacks`, `wordpressStack`, `bookstackStack`, `castopodStack` et `libretimeStack` du modèle LikeC4 (`docs/architecture/model/superlarsen.c4`) montrent ces briques ; les tableaux ci-dessous les détaillent.
 
 ## Niveau 1 : le dépôt
 

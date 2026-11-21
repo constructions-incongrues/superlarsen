@@ -2,10 +2,14 @@
   "devDependencies": {
     "@fission-ai/openspec": "2.1.0",
     "@trivoallan/ontrack": "^0.6.0",
-    "engineering": "npm:@trivoallan/ontrack-engineering@^0.6.0"
+    "engineering": "npm:@trivoallan/ontrack-engineering@^0.6.0",
+    "likec4": "1.61.0"
   },
   "allowScripts": {
     "@jackchuka/mdschema@0.15.1": true
   },
-  "license": "MIT"
+  "license": "MIT",
+  "scripts": {
+    "lint:architecture": "likec4 validate docs/architecture/model"
+  }
 }
