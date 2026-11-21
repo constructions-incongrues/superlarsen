@@ -14,7 +14,7 @@ services:
     restart: unless-stopped
 
   rabbitmq:
-    image: rabbitmq:3.13-alpine
+    image: rabbitmq:4.4.1-alpine@sha256:6bf98f3f634a57951103efe3e9ff866b5d8b3faa35cc7be12b2ce052d8367a12
     healthcheck:
       test: nc -z 127.0.0.1 5672
     env_file: .env
