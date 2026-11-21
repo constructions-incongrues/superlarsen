@@ -1,0 +1,11 @@
+# Outils hors du gestionnaire de paquets (ADR-0025, tools.manager: mise).
+# Les versions et leurs sommes de contrôle sont dans mise.lock.
+# Qui bouge les épingles : une personne, dans une PR qui met à jour mise.lock.
+[settings]
+lockfile = true
+
+[tools]
+terraform = "1.17.2"
+grype = "0.122.1"
+zizmor = "1.32.0"
+"npm:@trunkio/launcher" = "1.3.4"
