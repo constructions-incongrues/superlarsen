@@ -2,7 +2,7 @@
 adr: ADR-0004
 slug: caddy-labels
 title: Les services s'exposent par des labels Caddy
-status: proposed
+status: accepted
 date: 2026-11-21
 authors: [Tristan Rivoallan]
 supersedes: []
@@ -12,7 +12,7 @@ supersedes: []
 
 ## Status
 
-Proposed
+Accepted
 
 ## Context
 

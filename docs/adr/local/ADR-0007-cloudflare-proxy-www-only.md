@@ -2,7 +2,7 @@
 adr: ADR-0007
 slug: cloudflare-proxy-www-only
 title: Seul www passe par le proxy Cloudflare
-status: proposed
+status: accepted
 date: 2026-11-21
 authors: [Tristan Rivoallan]
 supersedes: []
@@ -12,7 +12,7 @@ supersedes: []
 
 ## Status
 
-Proposed
+Accepted
 
 ## Context
 

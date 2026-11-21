@@ -2,7 +2,7 @@
 adr: ADR-0006
 slug: terraform-shared-infrastructure
 title: L'infrastructure partagée est déclarée en Terraform
-status: proposed
+status: accepted
 date: 2026-11-21
 authors: [Tristan Rivoallan]
 supersedes: []
@@ -12,7 +12,7 @@ supersedes: []
 
 ## Status
 
-Proposed
+Accepted
 
 ## Context
 

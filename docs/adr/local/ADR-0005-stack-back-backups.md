@@ -2,7 +2,7 @@
 adr: ADR-0005
 slug: stack-back-backups
 title: Chaque stack se sauvegarde vers R2 avec stack-back
-status: proposed
+status: accepted
 date: 2026-11-21
 authors: [Tristan Rivoallan]
 supersedes: []
@@ -12,7 +12,7 @@ supersedes: []
 
 ## Status
 
-Proposed
+Accepted
 
 ## Context
 
