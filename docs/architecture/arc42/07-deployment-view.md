@@ -16,3 +16,15 @@ title: Vue de déploiement
 | Cloudflare R2 (WEUR)                        | les buckets `superlarsen` et `superlarsen-backups`                                                                              |
 
 Un seul environnement, la production. `www` est le seul enregistrement proxifié par Cloudflare ; l'origine WordPress n'accepte `www` que depuis les plages Cloudflare. Les autres sous-domaines arrivent directement sur Caddy.
+
+## Stacks déployées
+
+| Stack     | Adresse                                                              | Cartons                                                              |
+| --------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- |
+| bookstack | <https://wiki.superlarsen.fr>                                        | <https://cartons.pastis-hosting.net/stacks/68e7e547a8d8ffe5d97c1bd2> |
+| castopod  | <https://castopod.superlarsen.fr>                                    | <https://cartons.pastis-hosting.net/stacks/68961ec43f85f8cb80eccfa8> |
+| libretime | <https://libretime.superlarsen.fr>, <https://icecast.superlarsen.fr> | <https://cartons.pastis-hosting.net/stacks/6895ceb9dffe250360ab3f2e> |
+| sftp      | `sftp://sftp.superlarsen.fr:2222`                                    | <https://cartons.pastis-hosting.net/stacks/690f80656eba66e67ff936e7> |
+| wordpress | <https://www.superlarsen.fr>                                         | <https://cartons.pastis-hosting.net/stacks/689624b63f85f8cb80ecd01a> |
+
+L'état des services est sur <https://status.superlarsen.fr>.

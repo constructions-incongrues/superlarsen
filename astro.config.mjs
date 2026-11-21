@@ -19,29 +19,60 @@ export default defineConfig({
           href: "https://github.com/constructions-incongrues/superlarsen",
         },
       ],
+      // Barre latérale : spec docs-navigation (openspec/specs/docs-navigation).
       sidebar: [
         {
           label: "Guides",
           items: [{ autogenerate: { directory: "docs/how-to" } }],
         },
         {
-          label: "Référence",
-          items: [{ autogenerate: { directory: "docs/reference" } }],
-        },
-        {
-          label: "Architecture (arc42)",
-          items: [{ autogenerate: { directory: "docs/architecture/arc42" } }],
-        },
-        {
-          label: "Décisions du dépôt",
-          items: [{ autogenerate: { directory: "docs/adr/local" } }],
-        },
-        {
-          label: "Décisions de gouvernance",
-          collapsed: true,
-          items: [{ autogenerate: { directory: "docs/adr/engineering" } }],
+          label: "Plateforme",
+          items: [
+            {
+              label: "Architecture",
+              items: [
+                "architecture/arc42/01-introduction-and-goals",
+                "architecture/arc42/02-constraints",
+                "architecture/arc42/03-context-and-scope",
+                "architecture/arc42/04-solution-strategy",
+                "architecture/arc42/05-building-block-view",
+                "architecture/arc42/06-runtime-view",
+                "architecture/arc42/07-deployment-view",
+                "architecture/arc42/08-cross-cutting-concepts",
+                {
+                  label: "Décisions",
+                  items: [
+                    "architecture/arc42/09-architecture-decisions",
+                    { autogenerate: { directory: "docs/adr/local" } },
+                  ],
+                },
+                "architecture/arc42/10-quality-requirements",
+                "architecture/arc42/11-risks-and-technical-debt",
+                "architecture/arc42/12-glossary",
+              ],
+            },
+            {
+              label: "Model",
+              link: "/model/",
+              attrs: { target: "_blank", rel: "noopener" },
+            },
+            {
+              label: "Conventions",
+              items: [
+                {
+                  label: "ontrack-engineering",
+                  collapsed: true,
+                  items: [
+                    { autogenerate: { directory: "docs/adr/engineering" } },
+                  ],
+                },
+              ],
+            },
+          ],
         },
       ],
+      // Préfixe les liens d'ADR de la barre latérale par leur numéro (ADR-NNNN).
+      routeMiddleware: "./src/routeData.ts",
     }),
   ],
 });

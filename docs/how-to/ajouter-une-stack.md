@@ -52,4 +52,4 @@ Ajoutez le sous-domaine à `cname_records` dans `infrastructure/terraform/cloudf
 
 ## 5. Merger et vérifier
 
-Ouvrez la PR et suivez [modifier une stack](modifier-une-stack.md), étapes 2 à 4. Ajoutez la stack à [la référence des stacks](../reference/stacks.md) dans la même PR.
+Ouvrez la PR et suivez [modifier une stack](modifier-une-stack.md), étapes 2 à 4. Ajoutez la stack aux [stacks déployées](../architecture/arc42/07-deployment-view.md) et à la [vue en briques](../architecture/arc42/05-building-block-view.md) dans la même PR.

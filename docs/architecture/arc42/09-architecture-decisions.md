@@ -1,5 +1,7 @@
 ---
 title: Décisions d'architecture
+sidebar:
+  label: À propos
 ---
 
 Les décisions vivent dans `docs/adr/`, une par fichier, au format d'[ADR-0001](../../adr/engineering/ADR-0001-record-architecture-decisions.md) :

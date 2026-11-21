@@ -66,7 +66,7 @@ Les fichiers arrivent dans `/mnt/superlarsen/restauration/volumes/<service>/`. C
 
 ## 4. Vérifier
 
-- Le service répond : voir [les stacks](../reference/stacks.md).
+- Le service répond : voir [les stacks déployées](../architecture/arc42/07-deployment-view.md).
 - La sauvegarde de la nuit suivante réussit : son rapport arrive par e-mail.
 
 Voir aussi la [vue d'exécution](../architecture/arc42/06-runtime-view.md) pour le déroulé d'une sauvegarde.

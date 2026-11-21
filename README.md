@@ -5,7 +5,7 @@ L'hébergement des services en ligne de Superlarsen, décrit en code : stacks Do
 ## Documentation
 
 - Site : <https://constructions-incongrues.github.io/superlarsen/>
-- [Les stacks](docs/reference/stacks.md) : adresses, services, images, sauvegardes
+- [Les stacks](docs/architecture/arc42/07-deployment-view.md) : adresses et liens Cartons ; services et images dans la [vue en briques](docs/architecture/arc42/05-building-block-view.md)
 - [Guides](docs/how-to/) : modifier ou ajouter une stack, restaurer une sauvegarde, appliquer Terraform
 - [Architecture (arc42)](docs/architecture/arc42/01-introduction-and-goals.md) et [décisions](docs/adr/)
 
