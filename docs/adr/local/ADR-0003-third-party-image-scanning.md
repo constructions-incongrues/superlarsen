@@ -1,14 +1,14 @@
 ---
 adr: ADR-0003
 slug: third-party-image-scanning
-title: Vulnerability scans of third-party images report, they do not block
+title: Les scans de vulnérabilités des images tierces signalent, ils ne bloquent pas
 status: accepted
 date: 2026-11-21
 authors: [Tristan Rivoallan]
 supersedes: []
 ---
 
-# Vulnerability scans of third-party images report, they do not block
+# Les scans de vulnérabilités des images tierces signalent, ils ne bloquent pas
 
 ## Status
 
@@ -16,46 +16,46 @@ Accepted
 
 ## Context
 
-engineering/ADR-0019 rules `vulnerabilities.scanner: grype` and `vulnerabilities.fail_on: critical`: a critical vulnerability with a fix available fails the required check. Its rule 4 says an agent fixes by updating the dependency, through ADR-0018's updater.
+engineering/ADR-0019 fixe `vulnerabilities.scanner: grype` et `vulnerabilities.fail_on: critical` : une vulnérabilité critique dont un correctif existe fait échouer le check requis. Sa règle 4 dit qu'un agent corrige en mettant à jour la dépendance, par l'outil de mise à jour d'ADR-0018.
 
-This repository builds no image (engineering/ADR-0012: `delivery.target: platform`, `registry: none`). Every image in `stacks/*/compose.yaml` is published by its upstream project. On 2026-11-21, grype found fixable critical vulnerabilities in 12 of the 18 images, and in the newest release of every one of them as well: LibreTime 4.5.0 is its latest release, and MySQL 9.7.4, RabbitMQ 4.2.9, Castopod 1.15.7 and stack-back v1.5.4 still ship packages with a fixed version available. "Fixable" means a fixed package exists, not that a fixed image does. The repository cannot apply the fix; only the publisher can.
+Ce dépôt ne construit aucune image (engineering/ADR-0012 : `delivery.target: platform`, `registry: none`). Chaque image de `stacks/*/compose.yaml` est publiée par son projet amont. Le 2026-11-21, grype a trouvé des vulnérabilités critiques corrigeables dans 12 des 18 images, et aussi dans la dernière version de chacune : LibreTime 4.5.0 est sa dernière version, et MySQL 9.7.4, RabbitMQ 4.2.9, Castopod 1.15.7 et stack-back v1.5.4 livrent encore des paquets dont une version corrigée existe. « Corrigeable » veut dire qu'un paquet corrigé existe, pas qu'une image corrigée existe. Le dépôt ne peut pas appliquer le correctif ; seul l'éditeur le peut.
 
-A check that fails on every pull request for a reason no change here can fix is a check that gets turned off, which is the outcome ADR-0019 warns against.
+Un check qui échoue sur chaque PR pour une raison qu'aucun changement ici ne peut corriger est un check qu'on finit par désactiver, ce contre quoi ADR-0019 met en garde.
 
 ## Decision
 
-This repository departs from engineering/ADR-0019 on `fail_on` for third-party images only:
+Ce dépôt s'écarte d'engineering/ADR-0019 sur `fail_on`, pour les images tierces seulement :
 
-- the `vulnerabilities` workflow runs grype on every image of `stacks/*/compose.yaml`, on every pull request and weekly, with `--only-fixed`, and **reports without failing**;
-- a critical finding is acted on by updating the image, when a release that fixes it exists and is older than the cooldown, in a pull request of its own;
-- `vulnerabilities.fail_on: critical` stays the rule for anything this repository would build or publish itself.
+- le workflow `vulnerabilities` lance grype sur chaque image de `stacks/*/compose.yaml`, à chaque PR et chaque semaine, avec `--only-fixed`, et **signale sans échouer** ;
+- une vulnérabilité critique se traite en mettant à jour l'image, quand une version qui la corrige existe et a passé le délai d'attente, dans une PR à part ;
+- `vulnerabilities.fail_on: critical` reste la règle pour tout ce que ce dépôt construirait ou publierait lui-même.
 
-No ignore rule is written: findings stay visible in every run.
+Aucune règle d'exception n'est écrite : les résultats restent visibles à chaque exécution.
 
 ## Consequences
 
 ### Positive
 
-- The scan runs and is read, instead of being a red check everyone learns to skip.
-- Upgrades stay deliberate pull requests, each deployed on its own (engineering/ADR-0012).
+- Le scan tourne et se lit, au lieu d'être un check rouge que chacun apprend à ignorer.
+- Les montées de version restent des PR délibérées, déployées une par une (engineering/ADR-0012).
 
 ### Negative
 
-- Nothing stops a merge while a running image carries a critical vulnerability; a person has to read the report.
+- Rien n'arrête un merge alors qu'une image en service porte une vulnérabilité critique ; une personne doit lire le rapport.
 
 ### Neutral
 
-- If the repository starts building its own images, ADR-0019's blocking threshold applies to them unchanged.
+- Si le dépôt se met à construire ses propres images, le seuil bloquant d'ADR-0019 s'y applique tel quel.
 
 ## Alternatives Considered
 
-### Keep `fail_on: critical` and update every image
+### Garder `fail_on: critical` et mettre à jour chaque image
 
-Tried on 2026-11-21: no current release of the affected images clears the threshold, so the check would stay red.
+Essayé le 2026-11-21 : aucune version courante des images touchées ne passe sous le seuil, et le check resterait rouge.
 
-### Keep `fail_on: critical` with one ignore rule per finding
+### Garder `fail_on: critical` avec une règle d'exception par résultat
 
-Over a hundred entries, each saying "the publisher has not shipped the fix", to be renewed at every release: ADR-0019 rule 5's "switch turned off", spelt out one line at a time.
+Plus de cent entrées, chacune disant « l'éditeur n'a pas livré le correctif », à renouveler à chaque version : « l'interrupteur éteint » de la règle 5 d'ADR-0019, écrit une ligne à la fois.
 
 ## References
 
