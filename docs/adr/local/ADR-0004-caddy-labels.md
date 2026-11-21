@@ -1,14 +1,14 @@
 ---
 adr: ADR-0004
 slug: caddy-labels
-title: Services are exposed through Caddy labels
+title: Les services s'exposent par des labels Caddy
 status: proposed
 date: 2026-11-21
 authors: [Tristan Rivoallan]
 supersedes: []
 ---
 
-# Services are exposed through Caddy labels
+# Les services s'exposent par des labels Caddy
 
 ## Status
 
@@ -16,49 +16,49 @@ Proposed
 
 ## Context
 
-The `cartons` server runs one Caddy for every project it hosts. It reads Docker labels and builds its own configuration from them. This repository does not own that Caddy (arc42, section 2), and one person maintains the platform: a proxy file to edit on the server for each new domain would be a step outside the repository, which engineering/ADR-0012 and ADR-0002 rule out.
+Le serveur `cartons` fait tourner un seul Caddy pour tous les projets qu'il héberge. Ce Caddy lit les labels Docker et en tire sa propre configuration. Ce dépôt ne le possède pas (arc42, section 2), et une seule personne tient la plateforme : un fichier de proxy à éditer sur le serveur pour chaque nouveau domaine serait une étape hors du dépôt, ce qu'excluent engineering/ADR-0012 et ADR-0002.
 
-This decision was in force before it was written down. This record states it; it does not change it.
+Cette décision était en vigueur avant d'être écrite. Cet ADR la constate ; il ne la change pas.
 
 ## Decision
 
-A web service is exposed by two things in its `compose.yaml`, and nothing else:
+Un service web s'expose par deux éléments de son `compose.yaml`, et rien d'autre :
 
-- it joins the external Docker network `caddy`;
-- it carries the labels `caddy: <domain>` and `caddy.reverse_proxy: "{{upstreams <port>}}"`.
+- il rejoint le réseau Docker externe `caddy` ;
+- il porte les labels `caddy: <domaine>` et `caddy.reverse_proxy: "{{upstreams <port>}}"`.
 
-Caddy obtains the certificate and routes the domain. Access rules that belong to one service are labels too, as with the Cloudflare-only origin of `wordpress`.
+Caddy obtient le certificat et route le domaine. Les règles d'accès propres à un service sont des labels elles aussi, comme l'origine de `wordpress` réservée à Cloudflare.
 
-A service that is not HTTP publishes a port instead: `sftp` on 2222, and the LibreTime live inputs on 8001 and 8002.
+Un service qui n'est pas du HTTP publie un port à la place : `sftp` sur 2222, et les entrées de direct de LibreTime sur 8001 et 8002.
 
 ## Consequences
 
 ### Positive
 
-- Exposing a service is part of the pull request that adds it, and is reviewed with it.
-- No proxy configuration lives outside the repository.
+- Exposer un service fait partie de la PR qui l'ajoute, et se relit avec elle.
+- Aucune configuration de proxy ne vit hors du dépôt.
 
 ### Negative
 
-- Exposure depends on a Caddy this repository neither configures nor versions: a change on the server can break routing with no change here.
-- A published port bypasses Caddy and gets no TLS from it. The LibreTime live inputs are in clear text.
-- Traffic between Caddy and a container is plain HTTP on the `caddy` network.
+- L'exposition dépend d'un Caddy que ce dépôt ne configure pas et ne versionne pas : un changement sur le serveur peut casser le routage sans aucun changement ici.
+- Un port publié contourne Caddy et n'en reçoit pas de TLS. Les entrées de direct de LibreTime sont en clair.
+- Entre Caddy et un conteneur, le trafic est du HTTP en clair sur le réseau `caddy`.
 
 ### Neutral
 
-- The labels are not checked by any linter; a typo is seen after deployment.
+- Aucun linter ne vérifie les labels ; une faute de frappe se voit après le déploiement.
 
 ## Alternatives Considered
 
-### A Caddyfile on the server
+### Un Caddyfile sur le serveur
 
-One file for all domains, edited by hand: a step outside the repository and outside review.
+Un fichier pour tous les domaines, édité à la main : une étape hors du dépôt et hors de la relecture.
 
-### A reverse proxy in each stack
+### Un reverse proxy dans chaque stack
 
-Each stack would need ports 80 and 443, which one server cannot give to five stacks.
+Chaque stack aurait besoin des ports 80 et 443, qu'un seul serveur ne peut pas donner à cinq stacks.
 
 ## References
 
-- ADR-0002; engineering/ADR-0003, ADR-0012.
-- arc42, sections 4, 7 and 8.
+- ADR-0002 ; engineering/ADR-0003, ADR-0012.
+- arc42, sections 4, 7 et 8.

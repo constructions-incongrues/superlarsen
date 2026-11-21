@@ -1,14 +1,14 @@
 ---
 adr: ADR-0006
 slug: terraform-shared-infrastructure
-title: Shared infrastructure is declared in Terraform
+title: L'infrastructure partagée est déclarée en Terraform
 status: proposed
 date: 2026-11-21
 authors: [Tristan Rivoallan]
 supersedes: []
 ---
 
-# Shared infrastructure is declared in Terraform
+# L'infrastructure partagée est déclarée en Terraform
 
 ## Status
 
@@ -16,46 +16,46 @@ Proposed
 
 ## Context
 
-Some of what the stacks need is not a container: the Hetzner volume that holds their data, the DNS records and WAF rule of `superlarsen.fr`, and the R2 buckets. Set by hand in three consoles, these would be visible to nobody but the person who clicked, and could not be rebuilt from the repository.
+Une partie de ce dont les stacks ont besoin n'est pas un conteneur : le volume Hetzner qui porte leurs données, les enregistrements DNS et la règle WAF de `superlarsen.fr`, et les buckets R2. Réglés à la main dans trois consoles, ils ne seraient visibles que de la personne qui a cliqué, et ne pourraient pas être reconstruits depuis le dépôt.
 
-This decision was in force before it was written down. This record states it; it does not change it.
+Cette décision était en vigueur avant d'être écrite. Cet ADR la constate ; il ne la change pas.
 
 ## Decision
 
-The volume, the DNS records, the WAF rule and the R2 buckets are declared in `infrastructure/terraform/`. State and runs are in Terraform Cloud, workspace `constructions-incongrues/superlarsen`, which also holds the provider tokens.
+Le volume, les enregistrements DNS, la règle WAF et les buckets R2 sont déclarés dans `infrastructure/terraform/`. L'état et les exécutions sont dans Terraform Cloud, workspace `constructions-incongrues/superlarsen`, qui détient aussi les jetons des providers.
 
-A change is planned on its branch and applied by hand after the merge. Cartons does not run Terraform.
+Un changement est planifié sur sa branche et appliqué à la main après le merge. Cartons ne lance pas Terraform.
 
-The server `cartons` is read as a data source, not managed: it belongs to pastis-hosting.
+Le serveur `cartons` est lu comme une source de données, pas géré : il appartient à pastis-hosting.
 
 ## Consequences
 
 ### Positive
 
-- A DNS or WAF change is a reviewed pull request, with its reason in a comment next to the rule.
-- The infrastructure can be recreated from the repository.
+- Un changement de DNS ou de WAF est une PR relue, avec sa raison en commentaire à côté de la règle.
+- L'infrastructure peut être recréée depuis le dépôt.
 
 ### Negative
 
-- Between the merge and the manual apply, `main` describes an infrastructure that does not exist yet; nothing detects a forgotten apply.
-- Changes made outside Terraform are possible and have happened: the volume was enlarged by hand in 07/2026.
-- The zone's encryption mode is set outside Terraform, because of a bug in version 4 of the Cloudflare provider.
+- Entre le merge et l'application manuelle, `main` décrit une infrastructure qui n'existe pas encore ; rien ne détecte une application oubliée.
+- Des changements hors de Terraform sont possibles et ont eu lieu : le volume a été agrandi à la main en 07/2026.
+- Le mode de chiffrement de la zone se règle hors de Terraform, à cause d'un bogue de la version 4 du provider Cloudflare.
 
 ### Neutral
 
-- No required check runs `terraform plan`; `checkov` and `tflint` read the files without reaching the providers.
+- Aucun check requis ne lance `terraform plan` ; `checkov` et `tflint` lisent les fichiers sans atteindre les providers.
 
 ## Alternatives Considered
 
-### The providers' consoles
+### Les consoles des hébergeurs
 
-Nothing to learn, and nothing to read back or review.
+Rien à apprendre, et rien à relire ni à retrouver.
 
-### Apply from continuous integration on merge
+### Appliquer depuis l'intégration continue, au merge
 
-Removes the forgotten apply, but gives a workflow the tokens of both providers, and applies without anyone having read the plan on `main`.
+Supprime l'application oubliée, mais donne à un workflow les jetons des deux hébergeurs, et applique sans que personne ait lu le plan sur `main`.
 
 ## References
 
 - engineering/ADR-0012, ADR-0015.
-- arc42, sections 4, 6 and 11; the guide "Appliquer un changement Terraform".
+- arc42, sections 4, 6 et 11 ; le guide « Appliquer un changement Terraform ».

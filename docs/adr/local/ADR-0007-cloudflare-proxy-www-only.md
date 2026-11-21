@@ -1,14 +1,14 @@
 ---
 adr: ADR-0007
 slug: cloudflare-proxy-www-only
-title: Only www goes through the Cloudflare proxy
+title: Seul www passe par le proxy Cloudflare
 status: proposed
 date: 2026-11-21
 authors: [Tristan Rivoallan]
 supersedes: []
 ---
 
-# Only www goes through the Cloudflare proxy
+# Seul www passe par le proxy Cloudflare
 
 ## Status
 
@@ -16,53 +16,53 @@ Proposed
 
 ## Context
 
-The zone `superlarsen.fr` is on the Cloudflare Free plan. Its proxy refuses uploads over 100 MB, and its WAF rules cannot read a request body. Castopod and LibreTime receive audio files larger than that; Icecast serves a continuous stream; SFTP is not HTTP.
+La zone `superlarsen.fr` est sur le plan Cloudflare Free. Son proxy refuse les envois de plus de 100 Mo, et ses règles WAF ne lisent pas le corps d'une requête. Castopod et LibreTime reçoivent des fichiers audio plus gros que cela ; Icecast sert un flux continu ; SFTP n'est pas du HTTP.
 
-On 2026-11-19 a burst of "lost password" requests on the WordPress site sent 11 e-mails in 58 seconds.
+Le 2026-11-19, une rafale de « mot de passe oublié » sur le site WordPress a envoyé 11 e-mails en 58 secondes.
 
 ## Decision
 
-`www` is the only proxied record. Every other record is DNS only and reaches Caddy directly.
+`www` est le seul enregistrement proxifié. Tous les autres sont en DNS seul et arrivent directement sur Caddy.
 
-For `www`:
+Pour `www` :
 
-- a WAF custom rule sets a managed challenge on any request whose path contains `/wp-login.php`;
-- the origin answers 403 to any address outside Cloudflare's published ranges, by Caddy labels on the `wordpress` service;
-- the zone is in Full (strict) mode: Cloudflare checks the certificate Caddy presents.
+- une règle WAF personnalisée impose un défi à toute requête dont le chemin contient `/wp-login.php` ;
+- l'origine répond 403 à toute adresse hors des plages publiées par Cloudflare, par des labels Caddy sur le service `wordpress` ;
+- la zone est en mode Full (strict) : Cloudflare vérifie le certificat que Caddy présente.
 
 ## Consequences
 
 ### Positive
 
-- A robot that posts to `wp-login.php` without loading the form is stopped before WordPress.
-- The site cannot be reached around the proxy.
-- Large uploads to Castopod and LibreTime keep working.
+- Un robot qui poste sur `wp-login.php` sans charger le formulaire est arrêté avant WordPress.
+- Le site ne peut pas être atteint en contournant le proxy.
+- Les gros envois vers Castopod et LibreTime continuent de passer.
 
 ### Negative
 
-- The wiki, Castopod, LibreTime and Icecast have no WAF and expose the address of the server.
-- The list of Cloudflare ranges is copied into `stacks/wordpress/compose.yaml`; if Cloudflare adds a range, visitors routed through it get a 403 until the list is updated.
-- The challenge covers the whole of `wp-login.php`, not the lost-password action alone, since the Free plan cannot read the body where WordPress also reads it.
+- Le wiki, Castopod, LibreTime et Icecast n'ont pas de WAF et exposent l'adresse du serveur.
+- La liste des plages Cloudflare est recopiée dans `stacks/wordpress/compose.yaml` ; si Cloudflare en ajoute une, les visiteurs qui passent par elle reçoivent un 403 jusqu'à la mise à jour de la liste.
+- Le défi couvre tout `wp-login.php`, pas la seule action de mot de passe oublié : le plan Free ne lit pas le corps de la requête, où WordPress la lit aussi.
 
 ### Neutral
 
-- A proxied record has an automatic TTL; the others keep 300 seconds.
+- Un enregistrement proxifié a un TTL automatique ; les autres gardent 300 secondes.
 
 ## Alternatives Considered
 
-### Proxy every HTTP record
+### Proxifier tous les enregistrements HTTP
 
-Breaks uploads over 100 MB to Castopod and LibreTime.
+Casse les envois de plus de 100 Mo vers Castopod et LibreTime.
 
-### A paid Cloudflare plan
+### Un plan Cloudflare payant
 
-Lifts the upload limit and allows body inspection, at a recurring cost for one rule.
+Lève la limite d'envoi et permet de lire le corps des requêtes, pour un coût récurrent et une seule règle.
 
-### Rate limiting in WordPress
+### Limiter le débit dans WordPress
 
-A plugin to add and maintain in an image this repository does not build, and the request still reaches the server.
+Une extension à ajouter et à entretenir dans une image que ce dépôt ne construit pas, et la requête atteint quand même le serveur.
 
 ## References
 
 - ADR-0004, ADR-0006.
-- `infrastructure/terraform/cloudflare.tf`; arc42, sections 2, 7 and 10.
+- `infrastructure/terraform/cloudflare.tf` ; arc42, sections 2, 7 et 10.
