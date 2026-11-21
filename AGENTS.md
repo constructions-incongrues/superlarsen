@@ -52,7 +52,7 @@ Cartons récupère les changements par un bloc `resource_sync` de `resources.tom
 | bookstack | <https://wiki.superlarsen.fr>                                         | Wiki, MySQL 9.2                                      |
 | castopod  | <https://castopod.superlarsen.fr>                                     | Hébergement de podcasts, MariaDB + Redis             |
 | libretime | <https://libretime.superlarsen.fr> / <https://icecast.superlarsen.fr> | Programmation radio, PostgreSQL + RabbitMQ + Icecast |
-| wordpress | <https://www.superlarsen.fr>                                          | Site principal, MySQL 8.0                            |
+| wordpress | <https://www.superlarsen.fr>                                          | Site principal, MySQL 8.4                            |
 | sftp      | <sftp://sftp.superlarsen.fr:2222>                                     | Accès aux fichiers du volume WordPress               |
 
 ## LibreTime : traitement particulier
@@ -71,14 +71,13 @@ Chaque stack (sauf sftp) inclut un service `stack-back` (`ghcr.io/lawndoc/stack-
 Les services s'inscrivent aux sauvegardes par des labels Docker :
 
 - `stack-back.volumes: true` : sauvegarde les volumes nommés ou montés du service ;
-- `stack-back.mysql: true` / `stack-back.postgres: true` : fait un dump de la base avant la sauvegarde.
+- `stack-back.mysql: true` / `stack-back.mariadb: true` / `stack-back.postgres: true` : fait un dump de la base avant la sauvegarde.
 
 ## Réseau
 
-Chaque stack se connecte à deux réseaux Docker externes :
+Un service exposé sur le web rejoint le réseau Docker externe `caddy` : le reverse proxy le route d'après ses labels Docker.
 
-- `caddy` : le routage par le reverse proxy (les services s'exposent par des labels Docker) ;
-- `smtp` : l'envoi d'e-mails par le SMTP de Gmail.
+Les e-mails partent directement vers `smtp.gmail.com`, avec les réglages de `resources.toml`. Le réseau externe `smtp`, déclaré par trois stacks, n'est rejoint par aucun service.
 
 Pour ajouter un service exposé sur le web, ajouter le réseau `caddy` et les labels Caddy correspondants.
 

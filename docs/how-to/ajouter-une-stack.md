@@ -31,7 +31,7 @@ networks:
     external: true
 ```
 
-Pour envoyer des e-mails, ajoutez aussi le réseau externe `smtp`.
+Pour envoyer des e-mails, donnez au service les réglages SMTP de `smtp.gmail.com` dans `resources.toml`, comme le font les autres stacks ; aucun réseau n'est à ajouter.
 
 ## 2. L'inscrire aux sauvegardes
 

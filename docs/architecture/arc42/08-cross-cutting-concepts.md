@@ -12,11 +12,15 @@ Un service web rejoint le réseau Docker externe `caddy` et porte des labels Cad
 
 ## E-mail
 
-Chaque stack rejoint le réseau `smtp` et envoie par le SMTP de Gmail, avec un expéditeur par application.
+Les applications et `stack-back` envoient directement par `smtp.gmail.com`, avec le même compte et un expéditeur par application ; les réglages sont dans `resources.toml`. Trois stacks déclarent un réseau Docker externe `smtp` qu'aucun service ne rejoint ([dette](11-risks-and-technical-debt.md)).
 
 ## Sauvegardes
 
-Le service `stack-back` (`ghcr.io/lawndoc/stack-back:v1.4.5`) de chaque stack, sauf sftp, sauvegarde par Restic vers R2. Un service s'inscrit par labels : `stack-back.volumes: true` pour ses volumes, `stack-back.mysql: true` ou `stack-back.postgres: true` pour un dump de sa base.
+Le service `stack-back` (`ghcr.io/lawndoc/stack-back`) de chaque stack, sauf sftp, sauvegarde par Restic vers R2 ; sa version est dans chaque `compose.yaml`. Un service s'inscrit par labels : `stack-back.volumes: true` pour ses volumes, `stack-back.mysql: true`, `stack-back.mariadb: true` ou `stack-back.postgres: true` pour un dump de sa base.
+
+## Surveillance
+
+La page d'état <https://status.superlarsen.fr>, servie par GitHub Pages hors du serveur, dit si les services répondent. Le rapport quotidien de `stack-back`, par e-mail, dit si la sauvegarde a réussi. Rien d'autre n'alerte.
 
 ## Qualité des changements
 
