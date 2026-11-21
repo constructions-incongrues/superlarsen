@@ -36,6 +36,7 @@ lint:
 actions:
   enabled:
     - trunk-announce
+    - trunk-check-pre-commit # trufflehog et les linters avant chaque commit (ADR-0015)
     - trunk-check-pre-push
     - trunk-fmt-pre-commit
     - trunk-upgrade-available
