@@ -21,6 +21,14 @@ export default defineConfig({
       ],
       sidebar: [
         {
+          label: "Guides",
+          items: [{ autogenerate: { directory: "docs/how-to" } }],
+        },
+        {
+          label: "Référence",
+          items: [{ autogenerate: { directory: "docs/reference" } }],
+        },
+        {
           label: "Architecture (arc42)",
           items: [{ autogenerate: { directory: "docs/architecture/arc42" } }],
         },
