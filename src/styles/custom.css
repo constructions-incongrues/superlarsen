@@ -1,0 +1,6 @@
+/* Les ADR portent leur titre deux fois : `title:` dans le frontmatter, que
+   Starlight affiche, et `# Titre` en tête du corps (format ADR-0001). Le second
+   est masqué à l'affichage ; les fichiers, gelés une fois tranchés, ne changent pas. */
+.sl-markdown-content > h1:first-child {
+  display: none;
+}

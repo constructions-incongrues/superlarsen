@@ -10,6 +10,7 @@ export default defineConfig({
     mermaid(),
     starlight({
       title: "Superlarsen",
+      customCss: ["./src/styles/custom.css"],
       defaultLocale: "root",
       locales: { root: { label: "Français", lang: "fr" } },
       social: [
