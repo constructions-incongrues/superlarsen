@@ -17,9 +17,6 @@ runtimes:
 # This is the section where you manage your linters. (https://docs.trunk.io/check/configuration)
 lint:
   ignore:
-    - linters: [markdownlint]
-      paths:
-        - CLAUDE.md
     # Modèles OpenSpec copiés de l'amont (ADR-0016) : leur forme est celle d'OpenSpec.
     - linters: [markdownlint]
       paths:
