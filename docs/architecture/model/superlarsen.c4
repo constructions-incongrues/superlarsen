@@ -1,0 +1,203 @@
+// Modèle d'architecture de la plateforme Superlarsen (ADR-0010).
+// Les vues de contexte, de briques et de déploiement des sections 3, 5 et 7 d'arc42
+// en sont générées. Ne pas redessiner ces éléments ailleurs.
+
+specification {
+  element person {
+    style {
+      shape person
+    }
+  }
+  element system
+  element external {
+    style {
+      color muted
+    }
+  }
+  element stack
+  element service
+  element database {
+    style {
+      shape storage
+    }
+  }
+
+  deploymentNode cloud
+  deploymentNode server
+  deploymentNode volume
+}
+
+model {
+  visitor = person 'Visiteur' {
+    description 'Lit le site et le wiki, écoute les podcasts et la radio'
+  }
+  member = person 'Membre' {
+    description 'Publie sur le site, le wiki, Castopod et LibreTime'
+  }
+  maintainer = person 'Mainteneur' {
+    description 'Change la plateforme par des PR sur ce dépôt'
+  }
+
+  github = external 'GitHub' {
+    description "Héberge ce dépôt et la page d'état"
+  }
+  cartons = external 'Cartons (Komodo)' {
+    description 'Déploie les stacks à chaque push sur main'
+  }
+  caddy = external 'Caddy' {
+    description 'Reverse proxy du serveur, configuré par labels Docker'
+  }
+  cloudflare = external 'Cloudflare' {
+    description 'DNS de superlarsen.fr, proxy et WAF pour www'
+  }
+  r2 = external 'Cloudflare R2' {
+    description 'Buckets superlarsen et superlarsen-backups'
+  }
+  terraformcloud = external 'Terraform Cloud' {
+    description 'État et exécution de Terraform'
+  }
+  gmail = external 'Gmail SMTP' {
+    description 'Envoi des e-mails'
+  }
+
+  superlarsen = system 'Superlarsen' {
+    description 'Les services en ligne de Superlarsen, déclarés dans ce dépôt'
+
+    wordpress = stack 'wordpress' {
+      description 'Site principal, www.superlarsen.fr'
+      wpApp = service 'WordPress' {
+        description "Avec le mu-plugin d'anonymat des comptes"
+      }
+      wpDb = database 'MySQL 8.0'
+      wpBackup = service 'stack-back'
+      wpApp -> wpDb 'lit et écrit'
+      wpBackup -> wpDb 'dump'
+    }
+
+    bookstack = stack 'bookstack' {
+      description 'Wiki, wiki.superlarsen.fr'
+      bsApp = service 'BookStack'
+      bsDb = database 'MySQL 9.2'
+      bsBackup = service 'stack-back'
+      bsApp -> bsDb 'lit et écrit'
+      bsBackup -> bsDb 'dump'
+    }
+
+    castopod = stack 'castopod' {
+      description 'Podcasts, castopod.superlarsen.fr'
+      cpApp = service 'Castopod'
+      cpDb = database 'MariaDB'
+      cpCache = database 'Redis'
+      cpBackup = service 'stack-back'
+      cpApp -> cpDb 'lit et écrit'
+      cpApp -> cpCache 'cache'
+      cpBackup -> cpDb 'dump'
+    }
+
+    libretime = stack 'libretime' {
+      description 'Radio, libretime.superlarsen.fr et icecast.superlarsen.fr'
+      ltWeb = service 'nginx, legacy et API' {
+        description 'Interface et API de programmation'
+      }
+      ltPlayout = service 'playout et liquidsoap' {
+        description 'Joue la programmation'
+      }
+      ltWorkers = service 'analyzer et worker'
+      ltIcecast = service 'Icecast' {
+        description 'Diffuse le flux'
+      }
+      ltDb = database 'PostgreSQL'
+      ltQueue = database 'RabbitMQ'
+      ltBackup = service 'stack-back'
+      ltWeb -> ltDb 'lit et écrit'
+      ltWeb -> ltQueue 'publie'
+      ltWorkers -> ltQueue 'consomme'
+      ltPlayout -> ltQueue 'consomme'
+      ltPlayout -> ltIcecast 'envoie le son'
+      ltBackup -> ltDb 'dump'
+    }
+
+    sftp = stack 'sftp' {
+      description 'Accès aux fichiers du site, sftp.superlarsen.fr:2222'
+    }
+
+    sftp -> wordpress 'monte le volume du site'
+  }
+
+  visitor -> cloudflare 'résout et visite'
+  visitor -> superlarsen.wordpress 'lit le site, via le proxy Cloudflare'
+  visitor -> superlarsen.bookstack 'lit le wiki'
+  visitor -> superlarsen.castopod 'écoute les podcasts'
+  visitor -> superlarsen.libretime.ltIcecast 'écoute la radio'
+  member -> superlarsen.wordpress 'publie'
+  member -> superlarsen.bookstack 'écrit'
+  member -> superlarsen.castopod 'publie des épisodes'
+  member -> superlarsen.libretime.ltWeb 'programme'
+  member -> superlarsen.sftp 'dépose des fichiers'
+  maintainer -> github 'ouvre et merge des PR'
+  maintainer -> terraformcloud 'applique Terraform'
+
+  github -> cartons 'webhook de push'
+  cartons -> superlarsen 'déploie les stacks'
+  caddy -> superlarsen 'route les domaines'
+  terraformcloud -> cloudflare 'DNS, WAF et buckets'
+  superlarsen -> r2 'sauvegardes Restic, chaque jour à 01:00 UTC'
+  superlarsen -> gmail 'envoie les e-mails'
+}
+
+views {
+  view context {
+    title 'Contexte'
+    description "Section 3 d'arc42"
+    include superlarsen, visitor, member, maintainer
+    include github, cartons, caddy, cloudflare, r2, terraformcloud, gmail
+  }
+
+  view stacks of superlarsen {
+    title 'Briques : les stacks'
+    description "Section 5 d'arc42, niveau 1"
+    include *
+  }
+
+  view wordpressStack of superlarsen.wordpress {
+    title 'Briques : wordpress'
+    include *
+  }
+
+  view bookstackStack of superlarsen.bookstack {
+    title 'Briques : bookstack'
+    include *
+  }
+
+  view castopodStack of superlarsen.castopod {
+    title 'Briques : castopod'
+    include *
+  }
+
+  view libretimeStack of superlarsen.libretime {
+    title 'Briques : libretime'
+    include *
+  }
+
+  deployment view production {
+    title 'Déploiement : production'
+    description "Section 7 d'arc42"
+    include **
+  }
+}
+
+deployment {
+  hetzner = cloud 'Hetzner Cloud' {
+    cartonsServer = server 'Serveur cartons' {
+      description "Docker, Caddy et l'agent Cartons"
+      instanceOf superlarsen.wordpress
+      instanceOf superlarsen.bookstack
+      instanceOf superlarsen.castopod
+      instanceOf superlarsen.libretime
+      instanceOf superlarsen.sftp
+    }
+    data = volume 'Volume superlarsen' {
+      description '200 Go ext4, monté sous /mnt/superlarsen/'
+    }
+  }
+}
