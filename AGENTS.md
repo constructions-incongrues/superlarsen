@@ -90,6 +90,7 @@ Pour ajouter un service exposé sur le web, ajouter le réseau `caddy` et les la
 - Cartons applique le dépôt et n'y écrit jamais ([ADR-0002](docs/adr/local/ADR-0002-cartons-config-from-repository.md)). Une stack se modifie par une PR, jamais dans l'interface de Cartons : la synchronisation suivante écraserait la modification.
 
 <!-- ontrack:begin -->
+
 ## Project instructions (ontrack)
 
 When asked to review, rule on or supersede an ADR, run `npx ontrack review [adr]` and follow its output.
@@ -125,8 +126,7 @@ validation:
 
 ```yaml
 commits:
-  scopes:
-    [bookstack, castopod, libretime, sftp, wordpress, cloudflare, hetzner]
+  scopes: [bookstack, castopod, libretime, sftp, wordpress, cloudflare, hetzner]
   tool: none
 ```
 
