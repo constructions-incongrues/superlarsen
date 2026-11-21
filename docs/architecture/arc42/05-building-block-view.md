@@ -21,5 +21,3 @@ title: Vue en briques
 | `castopod`  | Castopod, MariaDB, Redis, `stack-back`                                                                 | `castopod.superlarsen.fr`                            |
 | `libretime` | API, legacy, nginx, playout, liquidsoap, analyzer, worker, PostgreSQL, RabbitMQ, Icecast, `stack-back` | `libretime.superlarsen.fr`, `icecast.superlarsen.fr` |
 | `sftp`      | atmoz/sftp, sur le volume WordPress                                                                    | `sftp.superlarsen.fr:2222`                           |
-
-`stacks/restic/` est un reste de l'ancien système de sauvegarde, remplacé par `stack-back`.

@@ -1,0 +1,44 @@
+# Scanne avec grype les images des stacks (ADR-0019 : scanner grype ; seules les
+# vulnérabilités corrigeables sont listées). Le job signale sans bloquer : les
+# images sont celles des éditeurs, et le correctif dépend d'eux (ADR local 0003).
+# Sur chaque PR et chaque semaine. grype vient de mise.lock (ADR-0025).
+name: vulnerabilities
+
+on:
+  pull_request:
+  merge_group:
+  schedule:
+    - cron: 17 4 * * 1
+
+permissions: {}
+
+concurrency:
+  group: vulnerabilities-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  grype:
+    name: grype
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read # checkout
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: jdx/mise-action@90f833d396d0cc3674b631d2d225e306476c303a # v5.2.10
+        with:
+          version: 2026.11.8
+          install_args: grype
+        env:
+          MISE_LOCKED: 1
+      - name: Scanner les images des stacks
+        run: |
+          # `${VAR:-défaut}` est remplacé par sa valeur par défaut.
+          images=$(grep -h '^ *image:' stacks/*/compose.yaml \
+            | sed -E 's/^ *image: *//; s/\$\{[A-Z_]+:-([^}]+)\}/\1/g' | sort -u)
+          for image in $images; do
+            echo "::group::$image"
+            grype "registry:$image" --platform linux/amd64 --only-fixed
+            echo "::endgroup::"
+          done

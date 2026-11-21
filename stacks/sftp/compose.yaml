@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/compose-spec/compose-spec/6b3a2a93e77c30ded1aa8264307e74d1208a6eae/schema/compose-spec.json
 services:
   sftp:
-    image: atmoz/sftp:alpine
+    image: atmoz/sftp:alpine@sha256:c5fb9e4beb8b7054a4c0b65c5e11df47cc20da95ad6002e88aecff62bab06372
     restart: always
     ports:
       - "2222:22"

@@ -21,7 +21,7 @@ services:
     restart: unless-stopped
 
   playout:
-    image: ghcr.io/libretime/libretime-playout:${LIBRETIME_VERSION:-latest}
+    image: ghcr.io/libretime/libretime-playout:${LIBRETIME_VERSION:-4.5.0}
     init: true
     ulimits:
       nofile: 1024
@@ -41,7 +41,7 @@ services:
     restart: unless-stopped
 
   liquidsoap:
-    image: ghcr.io/libretime/libretime-playout:${LIBRETIME_VERSION:-latest}
+    image: ghcr.io/libretime/libretime-playout:${LIBRETIME_VERSION:-4.5.0}
     command: /usr/local/bin/libretime-liquidsoap
     init: true
     ulimits:
@@ -62,7 +62,7 @@ services:
     restart: unless-stopped
 
   analyzer:
-    image: ghcr.io/libretime/libretime-analyzer:${LIBRETIME_VERSION:-latest}
+    image: ghcr.io/libretime/libretime-analyzer:${LIBRETIME_VERSION:-4.5.0}
     init: true
     ulimits:
       nofile: 1024
@@ -77,7 +77,7 @@ services:
     restart: unless-stopped
 
   worker:
-    image: ghcr.io/libretime/libretime-worker:${LIBRETIME_VERSION:-latest}
+    image: ghcr.io/libretime/libretime-worker:${LIBRETIME_VERSION:-4.5.0}
     init: true
     ulimits:
       nofile: 1024
@@ -93,7 +93,7 @@ services:
     restart: unless-stopped
 
   api:
-    image: ghcr.io/libretime/libretime-api:${LIBRETIME_VERSION:-latest}
+    image: ghcr.io/libretime/libretime-api:${LIBRETIME_VERSION:-4.5.0}
     init: true
     ulimits:
       nofile: 1024
@@ -113,7 +113,7 @@ services:
     restart: unless-stopped
 
   legacy:
-    image: ghcr.io/libretime/libretime-legacy:${LIBRETIME_VERSION:-latest}
+    image: ghcr.io/libretime/libretime-legacy:${LIBRETIME_VERSION:-4.5.0}
     init: true
     ulimits:
       nofile: 1024
@@ -131,7 +131,7 @@ services:
     restart: unless-stopped
 
   nginx:
-    image: ghcr.io/libretime/libretime-nginx:${LIBRETIME_VERSION:-latest}
+    image: ghcr.io/libretime/libretime-nginx:${LIBRETIME_VERSION:-4.5.0}
     depends_on:
       - legacy
     volumes:
