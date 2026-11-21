@@ -1,5 +1,6 @@
 {
   "permissions": {
-    "allow": ["Bash(grep -E \"\\\\.\\(tf|yaml|yml|toml|json\\)$\")"]
+    "allow": ["Bash(grep -E \"\\\\.\\(tf|yaml|yml|toml|json\\)$\")"],
+    "deny": ["Bash(gh pr merge:*)", "Bash(gh pr review:*)"]
   }
 }

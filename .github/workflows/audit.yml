@@ -4,11 +4,12 @@ name: audit
 
 on:
   pull_request:
+  merge_group:
 
 permissions: {}
 
 concurrency:
-  group: audit-${{ github.head_ref }}
+  group: audit-${{ github.head_ref || github.ref }}
   cancel-in-progress: true
 
 jobs:
