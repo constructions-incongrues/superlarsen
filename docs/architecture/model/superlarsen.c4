@@ -182,7 +182,7 @@ views {
   deployment view production {
     title 'Déploiement : production'
     description "Section 7 d'arc42"
-    include **
+    include hetzner.**
   }
 }
 
