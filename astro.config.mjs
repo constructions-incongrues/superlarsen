@@ -22,16 +22,16 @@ export default defineConfig({
       sidebar: [
         {
           label: "Architecture (arc42)",
-          items: [{ autogenerate: { directory: "architecture/arc42" } }],
+          items: [{ autogenerate: { directory: "docs/architecture/arc42" } }],
         },
         {
           label: "Décisions du dépôt",
-          items: [{ autogenerate: { directory: "adr/local" } }],
+          items: [{ autogenerate: { directory: "docs/adr/local" } }],
         },
         {
           label: "Décisions de gouvernance",
           collapsed: true,
-          items: [{ autogenerate: { directory: "adr/engineering" } }],
+          items: [{ autogenerate: { directory: "docs/adr/engineering" } }],
         },
       ],
     }),
