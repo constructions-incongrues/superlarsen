@@ -59,13 +59,44 @@ locals {
 resource "cloudflare_record" "cnames" {
   for_each = local.cname_records
 
-  zone_id = data.cloudflare_zone.main.id  
+  zone_id = data.cloudflare_zone.main.id
   name    = each.key
   content = each.value
   type    = "CNAME"
-  ttl     = 300
-  proxied = false
+  # Seul www passe par le proxy : castopod et libretime reçoivent des envois de plus de
+  # 100 Mo (limite du plan Free), icecast est un flux continu, sftp n'est pas du HTTP.
+  proxied = each.key == "www"
+  ttl     = each.key == "www" ? 1 : 300 # un enregistrement proxifié est en TTL auto (1)
   comment = "Géré par Terraform"
+}
+
+# Caddy présente déjà un certificat valide pour www : Cloudflare le vérifie.
+resource "cloudflare_zone_settings_override" "main" {
+  zone_id = data.cloudflare_zone.main.id
+  settings {
+    ssl = "strict"
+  }
+}
+
+# Le 2026-11-19, une rafale de « mot de passe oublié » a envoyé 11 mails en 58 s.
+# Défi sur tout /wp-login.php : l'humain le passe en chargeant le formulaire (GET), son
+# cookie cf_clearance (30 min) laisse passer l'envoi (POST) sans interstitiel. Un robot
+# qui poste directement est arrêté. On ne filtre pas sur action=lostpassword : WordPress
+# lit aussi l'action dans le corps du POST, que le plan Free ne sait pas inspecter.
+resource "cloudflare_ruleset" "waf_custom" {
+  zone_id     = data.cloudflare_zone.main.id
+  name        = "Règles personnalisées superlarsen.fr"
+  description = "Géré par Terraform"
+  kind        = "zone"
+  phase       = "http_request_firewall_custom"
+
+  rules {
+    ref         = "defi_wp_login"
+    description = "Défi sur wp-login.php (mot de passe oublié, connexion)"
+    expression  = "(http.host eq \"www.superlarsen.fr\" and http.request.uri.path contains \"/wp-login.php\")"
+    action      = "managed_challenge"
+    enabled     = true
+  }
 }
 
 # Bucket R2 avec le provider R2

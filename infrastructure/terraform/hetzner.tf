@@ -14,7 +14,7 @@ data "hcloud_server" "cartons" {
 
 resource "hcloud_volume" "superlarsen" {
   name      = "superlarsen"
-  size      = 100
+  size      = 200 # agrandi hors Terraform en 07/2026 ; un volume ne se réduit pas
   format    = "ext4"
   automount = true
   delete_protection = true
