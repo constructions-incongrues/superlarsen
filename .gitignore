@@ -2,3 +2,5 @@
 /stacks/libretime/config.yml
 /infrastructure/terraform/.terraform
 node_modules/
+dist/
+.astro/
