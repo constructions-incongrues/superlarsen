@@ -15,12 +15,12 @@
 
 ## 3. Forge (le mainteneur, après le merge de la PR)
 
-- [ ] 3.1 Créer le ruleset depuis `.github/rulesets/main.json` avec `gh api -X POST repos/{owner}/{repo}/rulesets --input .github/rulesets/main.json`
-- [ ] 3.2 Mettre en file une PR de test et vérifier que `trunk check` et `zizmor` tournent sur `merge_group` et que la PR est mergée en squash
-- [ ] 3.3 Supprimer la protection de branche classique de `main` (`gh api -X DELETE repos/{owner}/{repo}/branches/main/protection`)
-- [ ] 3.4 Vérifier qu'un push direct sur `main` et qu'un `gh pr merge --admin` sont refusés
+- [x] 3.1 Créer le ruleset depuis `.github/rulesets/main.json` avec `gh api -X POST repos/{owner}/{repo}/rulesets --input .github/rulesets/main.json`
+- [x] 3.2 Mettre en file une PR de test et vérifier que `trunk check` et `zizmor` tournent sur `merge_group` et que la PR est mergée en squash
+- [x] 3.3 Supprimer la protection de branche classique de `main` (`gh api -X DELETE repos/{owner}/{repo}/branches/main/protection`). Fait avant 3.2 : tant qu'elle existait, l'ancienne protection exigeait 1 approbation, et aucune PR ne pouvait entrer dans la file
+- [x] 3.4 Vérifier qu'un push direct sur `main` et qu'un `gh pr merge --admin` sont refusés. Les deux l'ont été le 2026-11-21, depuis un compte admin : le push avec `GH013`, `--admin` sur #50 avec « Changes must be made through the merge queue »
 
 ## 4. Clôture
 
-- [ ] 4.1 Vérifier dans Cartons que la synchronisation tourne toujours depuis `main` après `managed = false`
-- [ ] 4.2 Archiver le change (`openspec archive ruleset-main-merge-queue`) dans la PR qui coche la dernière tâche, et fermer #36
+- [x] 4.1 Vérifier dans Cartons que la synchronisation tourne toujours depuis `main` après `managed = false`. Le sync est vert après deux corrections : Managed passé à off dans l'interface (le sync ne peut pas modifier sa propre config pendant qu'il tourne), et le builder « gabelle », qui n'existait pas, retiré de `resources.toml` (#51)
+- [x] 4.2 Archiver le change (`openspec archive ruleset-main-merge-queue`) dans la PR qui coche la dernière tâche, et fermer #36
